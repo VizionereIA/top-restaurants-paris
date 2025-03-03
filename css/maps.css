@@ -1,0 +1,206 @@
+/**
+ * Styles pour l'intégration de Google Maps
+ */
+
+/* Conteneur de la carte */
+.map-container {
+  width: 100%;
+  height: 400px;
+  margin: 30px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.map-container.restaurant-page {
+  height: 300px;
+}
+
+/* Élément de la carte */
+#map, #restaurant-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Message de chargement */
+.map-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+}
+
+.map-loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Styles pour l'infobulle */
+.map-info-window {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 10px;
+  max-width: 300px;
+}
+
+.map-info-window h3 {
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+}
+
+.map-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #7f8c8d;
+}
+
+.map-star, .map-star-half, .map-star-empty {
+  color: #f1c40f;
+  margin-right: 2px;
+  font-size: 1.1rem;
+}
+
+.map-star-half {
+  position: relative;
+}
+
+.map-star-half::after {
+  content: '☆';
+  position: absolute;
+  left: 0;
+  color: #f1c40f;
+}
+
+.map-star-empty {
+  color: #ddd;
+}
+
+.map-cuisine, .map-address, .map-phone {
+  margin-bottom: 8px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.map-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.map-action-btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.map-view-btn {
+  background-color: #3498db;
+  color: white;
+  flex: 1;
+}
+
+.map-view-btn:hover {
+  background-color: #2980b9;
+}
+
+.map-directions-btn {
+  background-color: #f1f1f1;
+  color: #333;
+  flex: 1;
+}
+
+.map-directions-btn:hover {
+  background-color: #e0e0e0;
+}
+
+/* Bouton "Afficher tous les restaurants" */
+.show-all-restaurants-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 15px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+.show-all-restaurants-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* Bouton pour centrer la carte sur le restaurant actuel */
+.center-map-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  background-color: white;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+  cursor: pointer;
+  z-index: 1;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-map-btn:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .map-container {
+    height: 300px;
+  }
+  
+  .map-container.restaurant-page {
+    height: 250px;
+  }
+  
+  .map-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .map-info-window {
+    max-width: 250px;
+  }
+}
