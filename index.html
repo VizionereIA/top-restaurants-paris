@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top 5 des Meilleurs Restaurants de Paris</title>
+  <link rel="stylesheet" href="css/reviews.css">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -201,6 +202,12 @@
     .tags {
       margin-bottom: 15px;
     }
+
+    .actions-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
@@ -258,7 +265,9 @@
           <p class="review-author">- Meilleur-Brunch.com</p>
         </div>
         
-        <a href="#" class="visit-btn">Voir le menu</a>
+        <div class="actions-container">
+          <a href="restaurants/kafkaf.html" class="visit-btn">Voir le menu</a>
+        </div>
       </div>
     </div>
     
@@ -310,7 +319,9 @@
           <p class="review-author">- Avis Google</p>
         </div>
         
-        <a href="#" class="visit-btn">Voir le menu</a>
+        <div class="actions-container">
+          <a href="#" class="visit-btn">Voir le menu</a>
+        </div>
       </div>
     </div>
     
@@ -362,7 +373,9 @@
           <p class="review-author">- Newtable.com</p>
         </div>
         
-        <a href="#" class="visit-btn">Voir le menu</a>
+        <div class="actions-container">
+          <a href="#" class="visit-btn">Voir le menu</a>
+        </div>
       </div>
     </div>
     
@@ -414,7 +427,9 @@
           <p class="review-author">- Hotels.com</p>
         </div>
         
-        <a href="#" class="visit-btn">Voir le menu</a>
+        <div class="actions-container">
+          <a href="#" class="visit-btn">Voir le menu</a>
+        </div>
       </div>
     </div>
     
@@ -466,29 +481,13 @@
           <p class="review-author">- Dessance.com</p>
         </div>
         
-        <a href="#" class="visit-btn">Voir le menu</a>
+        <div class="actions-container">
+          <a href="#" class="visit-btn">Voir le menu</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    // Simple interactive elements
-    document.querySelectorAll('.restaurant-card').forEach(card => {
-      card.addEventListener('click', function(e) {
-        if (!e.target.classList.contains('visit-btn')) {
-          const title = this.querySelector('.restaurant-title').textContent;
-          alert(`Vous avez sélectionné ${title}`);
-        }
-      });
-    });
-
-    document.querySelectorAll('.visit-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const title = this.closest('.restaurant-card').querySelector('.restaurant-title').textContent;
-        alert(`Vous allez voir le menu de ${title}`);
-      });
-    });
-  </script>
+  <script src="js/reviews.js"></script>
 </body>
 </html>
