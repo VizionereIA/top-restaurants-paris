@@ -1,0 +1,324 @@
+/**
+ * Styles pour le système d'avis interactif
+ */
+
+/* Style pour les boutons d'avis sur la page d'accueil */
+.add-review-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #3498db;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #3498db;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+}
+
+.add-review-btn:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.show-all-reviews {
+  display: block;
+  background-color: transparent;
+  border: none;
+  color: #3498db;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: right;
+  transition: color 0.2s ease;
+}
+
+.show-all-reviews:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Style pour la fenêtre modale des avis */
+.reviews-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.reviews-modal-content {
+  background-color: white;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 30px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-modal:hover {
+  color: #555;
+}
+
+/* Style pour les avis individuels */
+.reviews-container {
+  margin-top: 25px;
+}
+
+.review-item, .review-card {
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.reviewer-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.reviewer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.review-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.review-rating .star {
+  color: #f1c40f;
+  font-size: 1.2rem;
+}
+
+.review-rating .star.empty {
+  color: #ddd;
+}
+
+.review-date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.review-content, .review-comment {
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* Style pour le formulaire d'avis */
+.review-form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+/* Système de notation par étoiles */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  cursor: pointer;
+  font-size: 2rem;
+  color: #ddd;
+  transition: color 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+  color: #f1c40f;
+}
+
+.star-rating label.selected {
+  color: #f1c40f;
+}
+
+/* Bouton d'envoi du formulaire */
+.submit-review-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-review-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Message de confirmation */
+.review-confirmation {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Contrôles de tri et de filtrage */
+.reviews-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.reviews-count {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.reviews-sort, .reviews-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reviews-sort label, .reviews-filter label {
+  color: #7f8c8d;
+}
+
+.reviews-sort select, .reviews-filter select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: white;
+}
+
+/* Message quand aucun avis */
+.no-reviews {
+  text-align: center;
+  color: #7f8c8d;
+  font-style: italic;
+  padding: 20px;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+}
+
+/* Section des avis sur la page détaillée */
+.reviews-section {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+.reviews-section h2, .add-review-container h3 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+}
+
+.add-review-container {
+  margin-top: 60px;
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+/* Responsivité */
+@media (max-width: 767px) {
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .reviews-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .reviews-modal-content {
+    padding: 20px;
+    width: 95%;
+  }
+  
+  .reviewer-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
