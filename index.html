@@ -59,6 +59,7 @@
       height: 250px;
       background-size: cover;
       background-position: center;
+      cursor: pointer;
     }
     
     .restaurant-content {
@@ -201,6 +202,13 @@
     .tags {
       margin-bottom: 15px;
     }
+    
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
@@ -212,7 +220,7 @@
   <div class="restaurant-container">
     <!-- Restaurant 1 -->
     <div class="restaurant-card">
-      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?restaurant,food');"></div>
+      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?restaurant,food');" onclick="window.location.href='restaurants/kafkaf.html'"></div>
       <div class="restaurant-content">
         <div class="restaurant-header">
           <h2 class="restaurant-title">1. Kafkaf</h2>
@@ -258,7 +266,7 @@
           <p class="review-author">- Meilleur-Brunch.com</p>
         </div>
         
-        <a href="#" class="visit-btn">Voir le menu</a>
+        <a href="restaurants/kafkaf.html" class="visit-btn">Voir le menu</a>
       </div>
     </div>
     
@@ -471,22 +479,37 @@
     </div>
   </div>
 
+  <footer class="footer">
+    <p>&copy; 2025 Top Restaurants Paris. Tous droits réservés.</p>
+  </footer>
+
   <script>
-    // Simple interactive elements
+    // Mise à jour des interactions pour rediriger vers les pages détaillées des restaurants
     document.querySelectorAll('.restaurant-card').forEach(card => {
       card.addEventListener('click', function(e) {
-        if (!e.target.classList.contains('visit-btn')) {
+        // Éviter de rediriger si l'utilisateur clique sur le bouton ou un lien
+        if (!e.target.classList.contains('visit-btn') && e.target.tagName !== 'A' && !e.target.closest('.filter-btn')) {
           const title = this.querySelector('.restaurant-title').textContent;
-          alert(`Vous avez sélectionné ${title}`);
+          const restaurantName = title.split('.')[1].trim().toLowerCase().replace(/[^a-z0-9]/g, '-');
+          
+          // Pour l'instant, seul Kafkaf a une page détaillée
+          if (restaurantName === 'kafkaf') {
+            window.location.href = 'restaurants/kafkaf.html';
+          } else {
+            alert(`La page détaillée pour ${title} sera bientôt disponible !`);
+          }
         }
       });
     });
 
     document.querySelectorAll('.visit-btn').forEach(btn => {
       btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const title = this.closest('.restaurant-card').querySelector('.restaurant-title').textContent;
-        alert(`Vous allez voir le menu de ${title}`);
+        // Si le lien n'est pas encore défini, afficher un message
+        if (this.getAttribute('href') === '#') {
+          e.preventDefault();
+          const title = this.closest('.restaurant-card').querySelector('.restaurant-title').textContent;
+          alert(`La page détaillée pour ${title} sera bientôt disponible !`);
+        }
       });
     });
   </script>
