@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top 5 des Meilleurs Restaurants de Paris</title>
+  <link rel="stylesheet" href="css/filters.css">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -471,11 +472,12 @@
     </div>
   </div>
 
+  <script src="js/filters.js"></script>
   <script>
     // Simple interactive elements
     document.querySelectorAll('.restaurant-card').forEach(card => {
       card.addEventListener('click', function(e) {
-        if (!e.target.classList.contains('visit-btn')) {
+        if (!e.target.classList.contains('visit-btn') && !e.target.closest('.filter-btn') && !e.target.classList.contains('filter-btn')) {
           const title = this.querySelector('.restaurant-title').textContent;
           alert(`Vous avez sélectionné ${title}`);
         }
