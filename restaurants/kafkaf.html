@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kafkaf - Middle Eastern Brunch à Paris</title>
+  <link rel="stylesheet" href="../css/restaurant-details.css">
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+  <script src="scripts/restaurant-details.js" defer></script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <a href="../index.html" class="back-btn">
+        ← Retour à la liste
+      </a>
+      <h1 class="restaurant-title">Kafkaf</h1>
+      <p class="restaurant-subtitle">Le meilleur brunch Middle Eastern de Paris</p>
+      <div class="rating-badge">
+        <span>4.9</span>
+        <span class="star">★</span>
+      </div>
+      <div class="tags">
+        <span class="tag cuisine">Middle Eastern</span>
+        <span class="tag ambiance">Cozy</span>
+        <span class="tag prix">€€</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="restaurant-content">
+      <div class="left-column">
+        <div class="gallery">
+          <div class="gallery-main">
+            <img src="https://source.unsplash.com/800x400/?restaurant,brunch" alt="Kafkaf Restaurant" id="main-image">
+          </div>
+          <div class="gallery-thumbnails">
+            <div class="gallery-thumbnail" onclick="changeImage('https://source.unsplash.com/800x400/?brunch')">
+              <img src="https://source.unsplash.com/100x100/?brunch" alt="Brunch at Kafkaf">
+            </div>
+            <div class="gallery-thumbnail" onclick="changeImage('https://source.unsplash.com/800x400/?restaurant,interior')">
+              <img src="https://source.unsplash.com/100x100/?restaurant,interior" alt="Kafkaf Interior">
+            </div>
+            <div class="gallery-thumbnail" onclick="changeImage('https://source.unsplash.com/800x400/?food,middle-eastern')">
+              <img src="https://source.unsplash.com/100x100/?food,middle-eastern" alt="Middle Eastern Food">
+            </div>
+            <div class="gallery-thumbnail" onclick="changeImage('https://source.unsplash.com/800x400/?cafe,cozy')">
+              <img src="https://source.unsplash.com/100x100/?cafe,cozy" alt="Cozy Atmosphere">
+            </div>
+          </div>
+        </div>
+
+        <div class="restaurant-description">
+          <h2>À propos de Kafkaf</h2>
+          <p>Kafkaf est couronné meilleur restaurant de Paris selon les avis Google, célèbre pour ses brunchs gourmands et originaux qui mêlent saveurs du Moyen-Orient et inspirations créatives dans un cadre chaleureux et instagrammable.</p>
+          <p>Ouvert en 2019 par Karim et Fadia, un couple passionné de cuisine et de voyage, Kafkaf s'est rapidement imposé comme une référence incontournable pour les amateurs de brunch à Paris. La décoration du restaurant est très cosy, avec des tons pastel chaleureux, des compositions de fleurs séchées et des néons qui créent une ambiance à la fois chaleureuse et contemporaine.</p>
+          <p>La philosophie de Kafkaf est de proposer une cuisine authentique et généreuse, inspirée des recettes traditionnelles du Moyen-Orient mais revisitées avec une touche moderne et créative. Tous les plats sont préparés à partir d'ingrédients frais et de qualité, sélectionnés avec soin auprès de producteurs locaux et de spécialistes des épices et produits orientaux.</p>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="restaurant-info">
+          <h2 class="info-title">Informations</h2>
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-text">
+              <h3>Adresse</h3>
+              <p>7 Rue Keller, 75011 Paris</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🕒</div>
+            <div class="info-text">
+              <h3>Horaires d'ouverture</h3>
+              <p>Mercredi - Dimanche: 10h00 - 16h00</p>
+              <p>Fermé les lundis et mardis</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">💶</div>
+            <div class="info-text">
+              <h3>Gamme de prix</h3>
+              <p>Brunch complet: 20€ - 30€</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-text">
+              <h3>Téléphone</h3>
+              <p>01 43 55 77 52</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">🌐</div>
+            <div class="info-text">
+              <h3>Site Web</h3>
+              <p><a href="#">www.kafkaf-paris.com</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">📱</div>
+            <div class="info-text">
+              <h3>Réseaux sociaux</h3>
+              <p>Instagram: @kafkaf_paris</p>
+            </div>
+          </div>
+
+          <div class="map-container" id="map">
+            <!-- La carte Google Maps sera chargée ici -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-section">
+      <h2>Notre Menu</h2>
+      <div class="menu-categories">
+        <div class="menu-category active" data-category="brunch">Brunch</div>
+        <div class="menu-category" data-category="boissons">Boissons</div>
+        <div class="menu-category" data-category="desserts">Desserts</div>
+      </div>
+
+      <div class="menu-items" id="brunch">
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Shakshuka Traditionnelle</h3>
+            <span class="menu-item-price">18€</span>
+          </div>
+          <p class="menu-item-description">Œufs pochés dans une sauce tomate épicée avec poivrons, oignons, épices du Moyen-Orient, servi avec du pain pita maison.</p>
+          <div class="menu-item-tags">
+            <span class="menu-item-tag">Végétarien</span>
+            <span class="menu-item-tag">Épicé</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Kafkaf Royal</h3>
+            <span class="menu-item-price">24€</span>
+          </div>
+          <p class="menu-item-description">Notre brunch phare : houmous de betterave, labneh aux herbes, œuf parfait, halloumi grillé, aubergine confite, salade fraîche et pain pita.</p>
+          <div class="menu-item-tags">
+            <span class="menu-item-tag">Signature</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Assiette Mezze</h3>
+            <span class="menu-item-price">22€</span>
+          </div>
+          <p class="menu-item-description">Assortiment de mezze : houmous, baba ganoush, tabbouleh, falafel maison, pickles, pain pita. Idéal à partager.</p>
+          <div class="menu-item-tags">
+            <span class="menu-item-tag">Végétarien</span>
+            <span class="menu-item-tag">À partager</span>
+          </div>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Avocado Toast Oriental</h3>
+            <span class="menu-item-price">16€</span>
+          </div>
+          <p class="menu-item-description">Pain au levain, avocat écrasé, dukkah (mélange de noix et d'épices), grenade, œuf poché et yaourt au tahini.</p>
+          <div class="menu-item-tags">
+            <span class="menu-item-tag">Végétarien</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-items" id="boissons" style="display: none;">
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Café Cardamome</h3>
+            <span class="menu-item-price">4.50€</span>
+          </div>
+          <p class="menu-item-description">Café arabica infusé avec de la cardamome, servi à la manière traditionnelle du Moyen-Orient.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Thé à la Menthe Marocain</h3>
+            <span class="menu-item-price">5€</span>
+          </div>
+          <p class="menu-item-description">Thé vert, menthe fraîche et sucre, servi dans un verre traditionnel.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Limonade à la Fleur d'Oranger</h3>
+            <span class="menu-item-price">6€</span>
+          </div>
+          <p class="menu-item-description">Citron frais, eau pétillante, sirop maison à la fleur d'oranger et menthe fraîche.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Jus Fraîchement Pressé</h3>
+            <span class="menu-item-price">7€</span>
+          </div>
+          <p class="menu-item-description">Au choix : Orange, Pamplemousse, ou Mix du jour (demandez à notre équipe).</p>
+        </div>
+      </div>
+
+      <div class="menu-items" id="desserts" style="display: none;">
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Baklava Maison</h3>
+            <span class="menu-item-price">7€</span>
+          </div>
+          <p class="menu-item-description">Pâtisserie feuilletée aux noix et pistaches, parfumée à l'eau de rose et au miel.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Mouhallabieh</h3>
+            <span class="menu-item-price">8€</span>
+          </div>
+          <p class="menu-item-description">Dessert libanais à base de lait, fleur d'oranger, pistaches et sirop de rose.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Sfouf</h3>
+            <span class="menu-item-price">6€</span>
+          </div>
+          <p class="menu-item-description">Gâteau libanais à la semoule, curcuma et anis, servi avec une boule de glace à la pistache.</p>
+        </div>
+
+        <div class="menu-item">
+          <div class="menu-item-header">
+            <h3 class="menu-item-title">Dattes Farcies</h3>
+            <span class="menu-item-price">7€</span>
+          </div>
+          <p class="menu-item-description">Dattes Medjool farcies à la pâte d'amande et enrobées de noix concassées.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews-section">
+      <h2>Avis des clients</h2>
+      
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <img src="https://source.unsplash.com/100x100/?person" alt="Sophie L.">
+            </div>
+            <div class="reviewer-name">Sophie L.</div>
+          </div>
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+        <p class="review-content">
+          "C'est undoubtement l'un des meilleurs brunchs que j'ai eu l'occasion de goûter à Paris ! La décoration du restaurant est très cosy, avec des tons pastel chaleureux. Les plats sont généreux et délicieux, un savoureux mélange entre tradition et modernité. Le service est impeccable, le personnel est très attentionné. À essayer absolument !"
+        </p>
+        <div class="review-date">12 février 2025</div>
+      </div>
+      
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <img src="https://source.unsplash.com/100x100/?man" alt="Thomas D.">
+            </div>
+            <div class="reviewer-name">Thomas D.</div>
+          </div>
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+        <p class="review-content">
+          "Une pépite dans le 11ème ! J'y suis allé sur recommandation et je n'ai pas été déçu. La shakshuka est juste incroyable, parfaitement épicée et généreuse. Les prix sont corrects vu la qualité et l'originalité des plats. Petit bémol, il faut réserver car victime de son succès !"
+        </p>
+        <div class="review-date">28 janvier 2025</div>
+      </div>
+      
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">
+              <img src="https://source.unsplash.com/100x100/?woman" alt="Léa M.">
+            </div>
+            <div class="reviewer-name">Léa M.</div>
+          </div>
+          <div class="review-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+        <p class="review-content">
+          "Lieu chaleureux avec un personnel aux petits soins et une carte très gourmande. J'ai adoré le Kafkaf Royal qui est un véritable festival de saveurs ! Les boissons sont aussi originales, notamment la limonade à la fleur d'oranger qui est rafraîchissante à souhait. Bien que bondé le week-end, ça vaut vraiment la peine d'attendre. Un brunch différent et mémorable."
+        </p>
+        <div class="review-date">15 janvier 2025</div>
+      </div>
+    </div>
+    
+    <section class="reservation-section">
+      <div class="reservation-container">
+        <h2 class="reservation-title">Réservez une table</h2>
+        <p>Réservez votre table pour éviter l'attente, surtout le week-end où nous sommes souvent complets.</p>
+        
+        <form class="reservation-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Nom</label>
+              <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="time">Heure</label>
+              <input type="time" id="time" class="form-control" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="guests">Nombre de personnes</label>
+            <input type="number" id="guests" min="1" max="10" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="notes">Notes spéciales (allergies, occasions spéciales, etc.)</label>
+            <textarea id="notes" class="form-control" rows="3"></textarea>
+          </div>
+          
+          <button type="submit" class="btn">Réserver maintenant</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="social-links">
+        <a href="#" class="social-link">f</a>
+        <a href="#" class="social-link">in</a>
+        <a href="#" class="social-link">ig</a>
+      </div>
+      
+      <nav class="footer-nav">
+        <ul>
+          <li><a href="../index.html">Accueil</a></li>
+          <li><a href="#">À propos</a></li>
+          <li><a href="#">Menu</a></li>
+          <li><a href="#">Réservation</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Politique de confidentialité</a></li>
+        </ul>
+      </nav>
+      
+      <div class="copyright">
+        &copy; 2025 Kafkaf Paris. Tous droits réservés.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
