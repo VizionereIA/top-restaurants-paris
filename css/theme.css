@@ -1,33 +1,33 @@
 /* Variables de thème */
 :root {
     /* Palette principale - Thème clair */
-    --primary-color: #2c5282; /* Bleu royal profond */
-    --primary-light: #4299e1; /* Bleu ciel */
-    --primary-dark: #1a365d; /* Bleu nuit */
+    --primary-color: #1a365d; /* Bleu profond */
+    --primary-light: #3182ce; /* Bleu ciel */
+    --primary-dark: #0c1e35; /* Bleu nuit */
     --secondary-color: #2d3748; /* Gris-bleu foncé */
-    --accent-color: #667eea; /* Bleu violet */
-    --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --button-gradient: linear-gradient(135deg, #4299e1 0%, #2c5282 100%);
-    --hover-gradient: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
+    --accent-color: #4299e1; /* Bleu électrique */
+    --accent-gradient: linear-gradient(135deg, #3182ce 0%, #1a365d 100%);
+    --button-gradient: linear-gradient(135deg, #4299e1 0%, #1a365d 100%);
+    --hover-gradient: linear-gradient(135deg, #1a365d 0%, #0c1e35 100%);
 
     /* Couleurs de base - Thème clair */
-    --bg-color: #f7fafc;
-    --text-color: #2d3748;
+    --bg-color: #f8fafc;
+    --text-color: #1a202c;
     --card-bg: #ffffff;
-    --header-bg: linear-gradient(135deg, #e6f7ff 0%, #ffffff 100%);
-    --filter-bg: #edf2f7;
+    --header-bg: linear-gradient(to right, #e6f7ff, #f8fafc);
+    --filter-bg: #f1f5f9;
     --border-color: #e2e8f0;
     
     /* Couleurs d'accentuation */
-    --success-color: #48bb78;
-    --warning-color: #ecc94b;
-    --danger-color: #f56565;
-    --info-color: #4299e1;
+    --success-color: #38a169;
+    --warning-color: #d69e2e;
+    --danger-color: #e53e3e;
+    --info-color: #3182ce;
     
     /* Ombres */
-    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --button-shadow: 0 4px 6px rgba(66, 153, 225, 0.25);
-    --hover-shadow: 0 10px 15px rgba(66, 153, 225, 0.35);
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --button-shadow: 0 4px 6px rgba(26, 54, 93, 0.15);
+    --hover-shadow: 0 10px 15px rgba(26, 54, 93, 0.25);
     
     /* Typographie */
     --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -60,27 +60,27 @@
 /* Variables pour le thème sombre */
 .dark-mode {
     /* Palette principale - Thème sombre */
-    --primary-color: #4299e1; /* Bleu ciel */
-    --primary-light: #63b3ed; /* Bleu ciel clair */
-    --primary-dark: #2a4365; /* Bleu nuit foncé */
+    --primary-color: #3182ce; /* Bleu ciel */
+    --primary-light: #4299e1; /* Bleu ciel clair */
+    --primary-dark: #1a365d; /* Bleu nuit */
     --secondary-color: #a0aec0; /* Gris-bleu clair */
-    --accent-color: #7f9cf5; /* Bleu violet clair */
-    --accent-gradient: linear-gradient(135deg, #7f9cf5 0%, #b794f4 100%);
-    --button-gradient: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
-    --hover-gradient: linear-gradient(135deg, #667eea 0%, #4299e1 100%);
+    --accent-color: #63b3ed; /* Bleu clair */
+    --accent-gradient: linear-gradient(135deg, #3182ce 0%, #1a365d 100%);
+    --button-gradient: linear-gradient(135deg, #3182ce 0%, #1a365d 100%);
+    --hover-gradient: linear-gradient(135deg, #1a365d 0%, #0c1e35 100%);
 
     /* Couleurs de base - Thème sombre */
-    --bg-color: #0f172a; /* Bleu très foncé */
+    --bg-color: #0a0f1c; /* Bleu noir profond */
     --text-color: #e2e8f0; /* Gris très clair */
-    --card-bg: #1a202c; /* Bleu-gris foncé */
-    --header-bg: linear-gradient(135deg, #0f172a 0%, #1a202c 100%);
-    --filter-bg: #2d3748; /* Gris-bleu moyen foncé */
-    --border-color: #4a5568; /* Gris-bleu moyen */
+    --card-bg: #111827; /* Bleu-noir */
+    --header-bg: linear-gradient(to right, #0a0f1c, #111827);
+    --filter-bg: #1e293b; /* Bleu-gris foncé */
+    --border-color: #2d3748; /* Gris-bleu foncé */
     
     /* Ombres pour le thème sombre */
-    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
-    --button-shadow: 0 4px 6px rgba(49, 130, 206, 0.5);
-    --hover-shadow: 0 10px 15px rgba(49, 130, 206, 0.6);
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+    --button-shadow: 0 4px 6px rgba(49, 130, 206, 0.3);
+    --hover-shadow: 0 10px 15px rgba(49, 130, 206, 0.4);
 }
 
 /* Styles de base pour le thème */
@@ -110,6 +110,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: var(--font-weight-bold);
     line-height: 1.2;
     color: var(--text-color);
+    letter-spacing: -0.02em;
 }
 
 h1 {
@@ -132,8 +133,8 @@ h2::after {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 60px;
-    height: 3px;
+    width: 40px;
+    height: 2px;
     background: var(--accent-gradient);
     border-radius: var(--border-radius-full);
 }
@@ -144,38 +145,55 @@ h3 {
 
 p {
     margin-bottom: var(--spacing-md);
+    font-weight: 300;
 }
 
 a {
     color: var(--primary-color);
     text-decoration: none;
     transition: color var(--transition-fast);
+    position: relative;
 }
 
 a:hover {
     color: var(--primary-light);
 }
 
+a:not(.btn):after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-light);
+    transition: width var(--transition-normal);
+}
+
+a:not(.btn):hover:after {
+    width: 100%;
+}
+
 /* Boutons stylisés */
-.btn {
+.btn, .view-details, button[type="submit"], #reset-filters, #search-button {
     display: inline-block;
     padding: var(--spacing-sm) var(--spacing-lg);
     background: var(--button-gradient);
     color: white;
     border: none;
-    border-radius: var(--border-radius-md);
+    border-radius: var(--border-radius-sm);
     font-weight: var(--font-weight-medium);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: all var(--transition-fast);
     box-shadow: var(--button-shadow);
     position: relative;
     overflow: hidden;
     z-index: 1;
 }
 
-.btn::before {
+.btn::before, .view-details::before, button[type="submit"]::before, #reset-filters::before, #search-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -187,16 +205,16 @@ a:hover {
     z-index: -1;
 }
 
-.btn:hover {
+.btn:hover, .view-details:hover, button[type="submit"]:hover, #reset-filters:hover, #search-button:hover {
     transform: translateY(-2px);
     box-shadow: var(--hover-shadow);
 }
 
-.btn:hover::before {
+.btn:hover::before, .view-details:hover::before, button[type="submit"]:hover::before, #reset-filters:hover::before, #search-button:hover::before {
     left: 0;
 }
 
-.btn:active {
+.btn:active, .view-details:active, button[type="submit"]:active, #reset-filters:active, #search-button:active {
     transform: translateY(0);
 }
 
@@ -217,17 +235,19 @@ a:hover {
 .mb-xl { margin-bottom: var(--spacing-xl); }
 
 /* Styles pour les cartes */
-.card {
+.card, .restaurant-card {
     background-color: var(--card-bg);
     border-radius: var(--border-radius-md);
     box-shadow: var(--card-shadow);
     overflow: hidden;
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    border: 1px solid transparent;
 }
 
-.card:hover {
+.card:hover, .restaurant-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--hover-shadow);
+    border-color: rgba(49, 130, 206, 0.1);
 }
 
 /* Bouton de thème personnalisé */
@@ -235,13 +255,13 @@ a:hover {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: var(--border-radius-full);
     background: var(--button-gradient);
     color: white;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     z-index: 1000;
     display: flex;
@@ -254,6 +274,31 @@ a:hover {
 #theme-toggle:hover {
     transform: scale(1.1);
     box-shadow: var(--hover-shadow);
+}
+
+/* Inputs et form elements */
+input, select, textarea {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: transparent;
+    color: var(--text-color);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    font-family: var(--font-family);
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.2);
+}
+
+label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-medium);
+    font-size: 0.9rem;
 }
 
 /* Responsive design */
@@ -270,8 +315,8 @@ a:hover {
         font-size: 1.25rem;
     }
     
-    .btn {
+    .btn, .view-details, button[type="submit"], #reset-filters, #search-button {
         padding: var(--spacing-sm) var(--spacing-md);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 }
