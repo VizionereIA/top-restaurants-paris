@@ -1,0 +1,46 @@
+{
+    "performance_checks": {
+        "mobile_compatibility": {
+            "required_breakpoints": [
+                "320px",
+                "375px", 
+                "425px",
+                "768px",
+                "1024px"
+            ],
+            "required_tests": [
+                "responsive_layout",
+                "touch_target_size",
+                "font_readability",
+                "images_scaling"
+            ]
+        },
+        "lighthouse_scores": {
+            "performance": 90,
+            "accessibility": 90,
+            "best_practices": 90,
+            "seo": 90
+        },
+        "loading_time": {
+            "max_time_ms": 3000,
+            "critical_resources": [
+                "index.html",
+                "theme.css",
+                "maps.js",
+                "theme-toggle.js"
+            ]
+        },
+        "browser_compatibility": [
+            "chrome",
+            "firefox", 
+            "safari",
+            "edge"
+        ]
+    },
+    "recommended_tools": [
+        "Google Lighthouse",
+        "Chrome DevTools",
+        "WebPageTest",
+        "GTmetrix"
+    ]
+}
