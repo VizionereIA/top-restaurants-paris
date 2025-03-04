@@ -3,51 +3,81 @@
 #restaurant-map {
     width: 100%;
     height: 400px;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--card-shadow);
     overflow: hidden;
     z-index: 1; /* S'assurer que la carte reste en dessous des autres éléments z-index */
+    border: 1px solid var(--border-color);
+    position: relative;
+}
+
+#map::before,
+#restaurant-map::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-gradient);
+    z-index: 10;
 }
 
 /* Styles pour la popup de Leaflet */
 .map-info-window {
-    max-width: 250px;
+    max-width: 280px;
     padding: 5px;
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-family);
 }
 
 .map-info-window h3 {
     margin: 0 0 10px 0;
-    color: #333;
-    font-size: 16px;
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
 }
 
 .map-info-window p {
-    margin: 5px 0;
-    color: #666;
-    font-size: 14px;
+    margin: 8px 0;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.map-info-window p strong {
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-right: 10px;
 }
 
 .map-info-window .info-link {
     display: inline-block;
-    margin-top: 10px;
-    padding: 6px 12px;
-    background-color: #3498db;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: var(--button-gradient);
     color: white;
     text-decoration: none;
-    border-radius: 4px;
-    font-size: 14px;
-    transition: background-color 0.3s;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+    box-shadow: var(--button-shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .map-info-window .info-link:hover {
-    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: var(--hover-shadow);
 }
 
 /* Styles pour la carte sur la page détaillée du restaurant */
 .single-map {
-    height: 300px;
+    height: 350px;
 }
 
 /* Styles pour le marqueur personnalisé */
@@ -55,17 +85,20 @@
     border-radius: 50%;
     width: 20px !important;
     height: 20px !important;
+    border: 2px solid white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Overrides pour la popup Leaflet */
 .leaflet-popup-content-wrapper {
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
     padding: 0;
+    box-shadow: var(--card-shadow);
 }
 
 .leaflet-popup-content {
-    margin: 10px;
+    margin: 12px;
     width: auto !important;
 }
 
@@ -73,10 +106,76 @@
     margin-top: -2px;
 }
 
+.leaflet-popup-tip {
+    box-shadow: var(--card-shadow);
+}
+
 /* Animation pour le chargement de la carte */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Boutons de contrôle de la carte */
+.leaflet-control-zoom {
+    border: none !important;
+    box-shadow: var(--card-shadow) !important;
+    margin: 15px !important;
+}
+
+.leaflet-control-zoom a {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 30px !important;
+    font-size: 18px !important;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.leaflet-control-attribution {
+    background-color: rgba(255, 255, 255, 0.7) !important;
+    padding: 4px 8px !important;
+    font-size: 10px !important;
+    color: var(--text-color) !important;
+}
+
+/* Mode sombre pour Leaflet */
+.dark-mode .leaflet-tile {
+    filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(1.1) saturate(0.8);
+}
+
+.dark-mode .leaflet-container {
+    background-color: #1a202c;
+}
+
+.dark-mode .leaflet-control-zoom a {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .leaflet-control-zoom a:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.dark-mode .leaflet-popup-content-wrapper,
+.dark-mode .leaflet-popup-tip {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .leaflet-control-attribution {
+    background-color: rgba(26, 32, 44, 0.7) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* Media queries */
@@ -91,46 +190,10 @@
     }
     
     .map-info-window {
-        max-width: 200px;
+        max-width: 220px;
     }
-}
-
-/* Correction pour le bouton de zoom */
-.leaflet-control-zoom {
-    border: none !important;
-}
-
-.leaflet-control-zoom a {
-    background-color: white !important;
-    color: #333 !important;
-    border: 1px solid #ddd !important;
-}
-
-/* Mode sombre pour Leaflet */
-.dark-mode .leaflet-tile {
-    filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(1.2);
-}
-
-.dark-mode .leaflet-container {
-    background-color: #333;
-}
-
-.dark-mode .leaflet-control-zoom a {
-    background-color: #222 !important;
-    color: #eee !important;
-    border: 1px solid #444 !important;
-}
-
-.dark-mode .leaflet-popup-content-wrapper,
-.dark-mode .leaflet-popup-tip {
-    background-color: #333;
-    color: #eee;
-}
-
-.dark-mode .map-info-window h3 {
-    color: #fff;
-}
-
-.dark-mode .map-info-window p {
-    color: #ddd;
+    
+    .leaflet-control-zoom {
+        margin: 10px !important;
+    }
 }
