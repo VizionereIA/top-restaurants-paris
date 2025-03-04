@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo Interactive - Top Restaurants Paris</title>
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/filters.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .demo-section {
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .feature-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .feature-buttons button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .feature-buttons button:hover {
+            background-color: #2980b9;
+        }
+        #interactive-content {
+            min-height: 300px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .restaurant-preview {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .restaurant-preview img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Démo Interactive - Top Restaurants Paris</h1>
+        <p>Explorez toutes les fonctionnalités de notre site !</p>
+    </header>
+
+    <div class="demo-section">
+        <h2>Sélectionnez une fonctionnalité</h2>
+        <div class="feature-buttons">
+            <button onclick="showRestaurants()">Liste des Restaurants</button>
+            <button onclick="showFilters()">Système de Filtrage</button>
+            <button onclick="showReservation()">Réservation</button>
+            <button onclick="showReviews()">Système d'Avis</button>
+            <button onclick="showMap()">Carte Interactive</button>
+            <button onclick="toggleTheme()">Mode Sombre/Clair</button>
+        </div>
+
+        <div id="interactive-content">
+            Cliquez sur un bouton pour commencer l'exploration
+        </div>
+    </div>
+
+    <script>
+        const contentArea = document.getElementById('interactive-content');
+        const restaurants = [
+            {
+                name: 'Kafkaf',
+                cuisine: 'Middle Eastern',
+                description: 'Restaurant de cuisine Middle Eastern avec un brunch innovant',
+                image: '/images/kafkaf-main.jpg'
+            },
+            {
+                name: 'L\'Épicerie du Nord',
+                cuisine: 'Indien',
+                description: 'Restaurant indien authentique près de la Gare du Nord',
+                image: '/images/epicerie-nord-main.jpg'
+            },
+            {
+                name: 'Saveurs d\'Orient',
+                cuisine: 'Marocain/Libanais',
+                description: 'Cuisine orientale dans le Passage des Panoramas',
+                image: '/images/saveurs-orient-main.jpg'
+            },
+            {
+                name: 'La Maison Mère',
+                cuisine: 'Franco-Américain',
+                description: 'Bistrot mi-parisien mi-new-yorkais dans le quartier SoPi',
+                image: '/images/maison-mere-main.jpg'
+            },
+            {
+                name: 'Dessance',
+                cuisine: 'Gastronomique',
+                description: 'Restaurant gastronomique primé dans le Marais',
+                image: '/images/dessance-main.jpg'
+            }
+        ];
+
+        function showRestaurants() {
+            contentArea.innerHTML = '<h3>Liste des Restaurants</h3>';
+            restaurants.forEach(restaurant => {
+                const restaurantEl = document.createElement('div');
+                restaurantEl.classList.add('restaurant-preview');
+                restaurantEl.innerHTML = `
+                    <img src="${restaurant.image}" alt="${restaurant.name}">
+                    <div>
+                        <h4>${restaurant.name}</h4>
+                        <p>Cuisine : ${restaurant.cuisine}</p>
+                        <p>${restaurant.description}</p>
+                    </div>
+                `;
+                contentArea.appendChild(restaurantEl);
+            });
+        }
+
+        function showFilters() {
+            contentArea.innerHTML = `
+                <h3>Système de Filtrage</h3>
+                <p>Filtrez les restaurants par :</p>
+                <select id="cuisine-filter">
+                    <option>Toutes les cuisines</option>
+                    <option>Middle Eastern</option>
+                    <option>Indien</option>
+                    <option>Marocain/Libanais</option>
+                    <option>Franco-Américain</option>
+                    <option>Gastronomique</option>
+                </select>
+                <div id="filtered-results"></div>
+            `;
+
+            const cuisineFilter = document.getElementById('cuisine-filter');
+            const resultsArea = document.getElementById('filtered-results');
+
+            cuisineFilter.addEventListener('change', (e) => {
+                const selectedCuisine = e.target.value;
+                resultsArea.innerHTML = '';
+                
+                const filteredRestaurants = selectedCuisine === 'Toutes les cuisines' 
+                    ? restaurants 
+                    : restaurants.filter(r => r.cuisine === selectedCuisine);
+
+                filteredRestaurants.forEach(restaurant => {
+                    const restaurantEl = document.createElement('div');
+                    restaurantEl.textContent = `${restaurant.name} - ${restaurant.cuisine}`;
+                    resultsArea.appendChild(restaurantEl);
+                });
+            });
+        }
+
+        function showReservation() {
+            contentArea.innerHTML = `
+                <h3>Réservation de Table</h3>
+                <form id="demo-reservation-form">
+                    <label>Restaurant</label>
+                    <select>
+                        ${restaurants.map(r => `<option>${r.name}</option>`).join('')}
+                    </select>
+                    <label>Date</label>
+                    <input type="date">
+                    <label>Nombre de personnes</label>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5+</option>
+                    </select>
+                    <button type="button" onclick="alert('Réservation simulée !')">Réserver</button>
+                </form>
+            `;
+        }
+
+        function showReviews() {
+            contentArea.innerHTML = `
+                <h3>Système d'Avis</h3>
+                <form id="demo-review-form">
+                    <label>Restaurant</label>
+                    <select>
+                        ${restaurants.map(r => `<option>${r.name}</option>`).join('')}
+                    </select>
+                    <label>Note</label>
+                    <select>
+                        <option>1 étoile</option>
+                        <option>2 étoiles</option>
+                        <option>3 étoiles</option>
+                        <option>4 étoiles</option>
+                        <option>5 étoiles</option>
+                    </select>
+                    <label>Commentaire</label>
+                    <textarea></textarea>
+                    <button type="button" onclick="alert('Avis simulé !')">Envoyer</button>
+                </form>
+            `;
+        }
+
+        function showMap() {
+            contentArea.innerHTML = `
+                <h3>Carte Interactive des Restaurants</h3>
+                <p>Fonctionnalité de carte Google Maps simulée</p>
+                <div style="width:100%;height:300px;background-color:#e0e0e0;display:flex;justify-content:center;align-items:center;">
+                    Carte Google Maps (simulation)
+                </div>
+            `;
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            contentArea.innerHTML = `
+                <h3>Mode Sombre/Clair</h3>
+                <p>Thème actuel : ${document.body.classList.contains('dark-mode') ? 'Sombre' : 'Clair'}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
