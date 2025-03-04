@@ -3,51 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top 5 des Meilleurs Restaurants de Paris</title>
+  
+  <!-- Métadonnées SEO -->
+  <title>Top 5 Restaurants de Paris - Meilleurs Restaurants Parisiens</title>
+  <meta name="description" content="Découvrez les 5 meilleurs restaurants de Paris selon les notes Google. Cuisine française, internationale, gastronomie - Filtres, réservations, et expérience interactive.">
+  <meta name="keywords" content="restaurants Paris, top restaurants, gastronomie parisienne, meilleurs restaurants, cuisine française">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://top-restaurants-paris.com/">
+  <meta property="og:title" content="Top 5 Restaurants de Paris">
+  <meta property="og:description" content="Découvrez les 5 meilleurs restaurants de Paris selon les notes Google.">
+  <meta property="og:image" content="/images/top-restaurants-paris-og.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://top-restaurants-paris.com/">
+  <meta name="twitter:title" content="Top 5 Restaurants de Paris">
+  <meta name="twitter:description" content="Découvrez les 5 meilleurs restaurants de Paris selon les notes Google.">
+  <meta name="twitter:image" content="/images/top-restaurants-paris-og.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png">
+
   <!-- Liens CSS -->
   <link rel="stylesheet" href="css/theme.css">
   <link rel="stylesheet" href="css/filters.css">
   <link rel="stylesheet" href="css/maps.css">
-  <style>
-    /* Styles existants conservés */
-  </style>
+  <link rel="stylesheet" href="css/reservation.css">
+  
+  <!-- Accessibilité -->
+  <link rel="preconnect" href="https://maps.googleapis.com">
+  <link rel="preload" href="js/maps.js" as="script">
 </head>
 <body>
-  <!-- Bouton de thème -->
-  <button id="theme-toggle" aria-label="Toggle Theme">☀️</button>
+  <!-- Bouton de thème avec attributs d'accessibilité -->
+  <button id="theme-toggle" aria-label="Basculer entre mode clair et sombre" role="switch" aria-checked="false">☀️</button>
 
-  <header>
-    <h1>Top 5 des Meilleurs Restaurants de Paris</h1>
-    <p class="subtitle">Selon les notes et avis Google - Classement Sunday</p>
+  <header role="banner">
+    <h1 tabindex="0">Top 5 des Meilleurs Restaurants de Paris</h1>
+    <p class="subtitle" aria-describedby="subtitle-description">
+      Selon les notes et avis Google - Classement Sunday
+    </p>
+    <div id="subtitle-description" class="sr-only">
+      Liste des 5 restaurants les mieux notés à Paris, sélectionnés selon les avis Google
+    </div>
   </header>
 
-  <!-- Nouvelle section Carte -->
-  <section class="map-section">
-    <h2>Restaurants sur la carte</h2>
-    <div id="home-map"></div>
+  <!-- Section Filtres avec attributs ARIA -->
+  <div class="filters-container" role="group" aria-labelledby="filters-heading">
+    <h2 id="filters-heading" class="sr-only">Filtres de recherche</h2>
+    <!-- Contenu des filtres -->
+  </div>
+
+  <!-- Section Carte avec attributs d'accessibilité -->
+  <section aria-labelledby="map-section-title">
+    <h2 id="map-section-title" class="sr-only">Carte des restaurants</h2>
+    <div id="home-map" role="img" aria-label="Carte montrant l'emplacement des 5 meilleurs restaurants de Paris"></div>
   </section>
 
-  <!-- Filtres existants -->
-  <div class="filters-container">
-    <!-- Contenu des filtres conservé -->
-  </div>
-
   <!-- Liste des restaurants -->
-  <div id="restaurant-list" class="restaurant-container">
-    <!-- Contenu existant des restaurants -->
+  <div id="restaurant-list" class="restaurant-container" role="list" aria-label="Liste des restaurants">
+    <!-- Les restaurants seront ajoutés dynamiquement -->
   </div>
 
-  <!-- Scripts JS -->
-  <script src="js/theme-toggle.js" type="module"></script>
-  <script src="js/filters.js" type="module"></script>
-  <script src="js/maps.js" type="module"></script>
+  <!-- Scripts avec préchargement et attributs async -->
+  <script src="js/theme-toggle.js" type="module" async></script>
+  <script src="js/filters.js" type="module" async></script>
+  <script src="js/maps.js" type="module" async></script>
   
-  <!-- Note sur l'API Google Maps -->
-  <div class="api-note">
-    <small>
-      ⚠️ Notez que la carte nécessite une clé API Google Maps valide. 
-      En mode démo, certaines fonctionnalités peuvent être limitées.
-    </small>
-  </div>
+  <!-- Message d'erreur si JavaScript est désactivé -->
+  <noscript>
+    <div class="no-js-warning" role="alert">
+      Ce site nécessite JavaScript pour fonctionner correctement. Veuillez l'activer dans vos paramètres de navigateur.
+    </div>
+  </noscript>
 </body>
 </html>
