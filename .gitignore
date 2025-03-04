@@ -1,25 +1,17 @@
-# Fichiers de système
-.DS_Store
-Thumbs.db
-
-# Fichiers de configuration IDE
-.vscode/
-.idea/
-*.sublime-project
-*.sublime-workspace
-
-# Dépendances et modules
+# Dépendances Node.js
 node_modules/
 npm-debug.log
 yarn-error.log
+package-lock.json
+yarn.lock
 
-# Fichiers de build et distribution
-/dist
-/build
-/.next
-/.nuxt
+# Fichiers de build
+dist/
+build/
+*.min.js
+*.min.css
 
-# Fichiers de environnement
+# Fichiers de configuration d'environnement
 .env
 .env.local
 .env.development.local
@@ -28,18 +20,45 @@ yarn-error.log
 
 # Fichiers de cache
 .cache/
-
-# Logs
-*.log
-
-# Configuration spécifique au projet
-config.json
-api-keys.js
+.parcel-cache/
 
 # Fichiers temporaires
-*.tmp
-*.bak
-*.swp
+.tmp/
+.temp/
 
-# Ignorar fichiers de configuration Google Maps
-google-maps-api-key.js
+# Clés API (ne pas stocker dans le dépôt)
+api-keys.js
+config.js
+
+# Logs
+logs
+*.log
+
+# Répertoires de couverture de test
+coverage/
+.nyc_output/
+
+# Fichiers de lock
+.lock-wscript
+
+# Dossiers Mac
+.DS_Store
+
+# Dossiers Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Fichiers IDE et éditeurs
+.idea/
+.vscode/
+*.swp
+*.swo
+.editorconfig
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers temporaires
+*~
+*.bak
+*.backup
