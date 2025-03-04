@@ -61,11 +61,34 @@ class RestaurantMaps {
             mapElement.style.borderRadius = "8px";
         }
     }
+    
+    // Méthode spécifique pour l'affichage d'un seul restaurant
+    initSingle(elementId, restaurant) {
+        // Pour le moment, afficher un message d'attente au lieu de la carte
+        const mapElement = document.getElementById(elementId);
+        if (mapElement) {
+            mapElement.innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; text-align: center;">
+                    <p>La carte de localisation de ${restaurant.name} sera bientôt disponible</p>
+                    <p>Adresse: ${restaurant.address}</p>
+                </div>
+            `;
+            mapElement.style.backgroundColor = "#f4f4f4";
+            mapElement.style.border = "1px solid #ddd";
+            mapElement.style.borderRadius = "8px";
+        }
+    }
 
     // Méthode statique pour initialiser facilement
     static init(elementId) {
         const mapManager = new RestaurantMaps();
         mapManager.initMap(elementId);
+    }
+    
+    // Méthode statique pour initialiser une carte avec un seul restaurant
+    static initSingle(elementId, restaurant) {
+        const mapManager = new RestaurantMaps();
+        mapManager.initSingle(elementId, restaurant);
     }
 }
 
