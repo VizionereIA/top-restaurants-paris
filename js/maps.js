@@ -1,4 +1,4 @@
-// Système de gestion des cartes Google Maps
+// Système de gestion des cartes avec Leaflet (ne nécessite pas de clé API)
 
 class RestaurantMaps {
     constructor() {
@@ -9,7 +9,8 @@ class RestaurantMaps {
                 lng: 2.3822,
                 address: '7 Rue Keller, 75011 Paris',
                 rating: 4.9,
-                cuisine: 'Middle Eastern'
+                cuisine: 'Middle Eastern',
+                id: 'kafkaf'
             },
             {
                 name: 'L\'Épicerie du Nord',
@@ -17,7 +18,8 @@ class RestaurantMaps {
                 lng: 2.3522,
                 address: 'Quartier Gare du Nord, 75010 Paris',
                 rating: 4.8,
-                cuisine: 'Indien'
+                cuisine: 'Indien',
+                id: 'lepicerie-du-nord'
             },
             {
                 name: 'Saveurs d\'Orient',
@@ -25,7 +27,8 @@ class RestaurantMaps {
                 lng: 2.3454,
                 address: 'Passage des Panoramas, 75002 Paris',
                 rating: 4.8,
-                cuisine: 'Marocain/Libanais'
+                cuisine: 'Marocain/Libanais',
+                id: 'saveurs-orient'
             },
             {
                 name: 'La Maison Mère',
@@ -33,7 +36,8 @@ class RestaurantMaps {
                 lng: 2.3451,
                 address: '7 rue Mayran, 75009 Paris',
                 rating: 4.7,
-                cuisine: 'Franco-Américain'
+                cuisine: 'Franco-Américain',
+                id: 'maison-mere'
             },
             {
                 name: 'Dessance',
@@ -41,7 +45,8 @@ class RestaurantMaps {
                 lng: 2.3662,
                 address: 'Le Marais, 75003 Paris',
                 rating: 4.7,
-                cuisine: 'Gastronomique'
+                cuisine: 'Gastronomique',
+                id: 'dessance'
             }
         ];
     }
@@ -50,29 +55,23 @@ class RestaurantMaps {
         const mapElement = document.getElementById(elementId);
         if (!mapElement) return;
         
-        // Vérifier si l'API Google Maps est disponible
-        if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-            this.loadGoogleMapsScript(elementId);
+        // Vérifier si Leaflet est disponible
+        if (typeof L === 'undefined') {
+            this.loadLeafletScript(elementId);
             return;
         }
         
         try {
             // Créer la carte centrée sur Paris
-            const map = new google.maps.Map(mapElement, {
-                center: { lat: 48.8566, lng: 2.3522 }, // Paris
-                zoom: 12,
-                styles: this.getMapStyles(),
-                mapTypeControl: false,
-                streetViewControl: false,
-                fullscreenControl: true,
-                zoomControl: true
-            });
+            const map = L.map(elementId).setView([48.8566, 2.3522], 12);
+            
+            // Ajouter le fond de carte OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
             
             // Ajouter les marqueurs pour chaque restaurant
             this.addMarkers(map);
-            
-            // Ajouter les événements pour centrer la carte
-            this.addMapEvents(map);
             
         } catch (error) {
             console.error('Erreur lors de l\'initialisation de la carte :', error);
@@ -84,9 +83,9 @@ class RestaurantMaps {
         const mapElement = document.getElementById(elementId);
         if (!mapElement) return;
         
-        // Vérifier si l'API Google Maps est disponible
-        if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-            this.loadGoogleMapsScript(elementId, restaurant);
+        // Vérifier si Leaflet est disponible
+        if (typeof L === 'undefined') {
+            this.loadLeafletScript(elementId, restaurant);
             return;
         }
         
@@ -95,36 +94,20 @@ class RestaurantMaps {
             const restaurantData = this.restaurants.find(r => r.name === restaurant.name) || restaurant;
             
             // Créer la carte centrée sur le restaurant
-            const map = new google.maps.Map(mapElement, {
-                center: { lat: restaurantData.lat, lng: restaurantData.lng },
-                zoom: 15,
-                styles: this.getMapStyles(),
-                mapTypeControl: false,
-                streetViewControl: true,
-                fullscreenControl: true,
-                zoomControl: true
-            });
+            const map = L.map(elementId).setView([restaurantData.lat, restaurantData.lng], 15);
+            
+            // Ajouter le fond de carte OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
             
             // Ajouter un marqueur pour le restaurant
-            const marker = new google.maps.Marker({
-                position: { lat: restaurantData.lat, lng: restaurantData.lng },
-                map: map,
-                title: restaurantData.name,
-                animation: google.maps.Animation.DROP,
-                icon: this.getMarkerIcon(restaurantData.rating)
-            });
+            const marker = L.marker([restaurantData.lat, restaurantData.lng], {
+                title: restaurantData.name
+            }).addTo(map);
             
-            // Ajouter une info-bulle
-            const infowindow = new google.maps.InfoWindow({
-                content: this.createInfoWindowContent(restaurantData)
-            });
-            
-            marker.addListener('click', function() {
-                infowindow.open(map, marker);
-            });
-            
-            // Ouvrir l'info-bulle par défaut
-            infowindow.open(map, marker);
+            // Ajouter une popup
+            marker.bindPopup(this.createInfoWindowContent(restaurantData)).openPopup();
             
         } catch (error) {
             console.error('Erreur lors de l\'initialisation de la carte :', error);
@@ -133,38 +116,28 @@ class RestaurantMaps {
     }
     
     addMarkers(map) {
-        const bounds = new google.maps.LatLngBounds();
+        const bounds = [];
         
         this.restaurants.forEach(restaurant => {
-            const marker = new google.maps.Marker({
-                position: { lat: restaurant.lat, lng: restaurant.lng },
-                map: map,
+            // Créer un marqueur personnalisé en fonction de la note
+            const markerIcon = this.getMarkerIcon(restaurant.rating);
+            
+            const marker = L.marker([restaurant.lat, restaurant.lng], {
                 title: restaurant.name,
-                animation: google.maps.Animation.DROP,
-                icon: this.getMarkerIcon(restaurant.rating)
-            });
+                icon: markerIcon
+            }).addTo(map);
             
-            // Ajouter une info-bulle
-            const infowindow = new google.maps.InfoWindow({
-                content: this.createInfoWindowContent(restaurant)
-            });
+            // Ajouter une popup
+            marker.bindPopup(this.createInfoWindowContent(restaurant));
             
-            marker.addListener('click', function() {
-                infowindow.open(map, marker);
-            });
-            
-            // Étendre les limites de la carte pour inclure tous les marqueurs
-            bounds.extend(marker.getPosition());
+            // Ajouter les coordonnées pour ajuster la vue
+            bounds.push([restaurant.lat, restaurant.lng]);
         });
         
         // Ajuster la vue pour inclure tous les marqueurs
-        map.fitBounds(bounds);
-        
-        // S'assurer que le zoom n'est pas trop élevé
-        const listener = google.maps.event.addListener(map, "idle", function() { 
-            if (map.getZoom() > 16) map.setZoom(16); 
-            google.maps.event.removeListener(listener); 
-        });
+        if (bounds.length > 0) {
+            map.fitBounds(bounds);
+        }
     }
     
     createInfoWindowContent(restaurant) {
@@ -194,138 +167,19 @@ class RestaurantMaps {
             color = '#FF5722'; // Orange pour moyen
         }
         
-        return {
-            path: google.maps.SymbolPath.CIRCLE,
-            fillColor: color,
-            fillOpacity: 0.9,
-            scale: 10,
-            strokeColor: '#FFFFFF',
-            strokeWeight: 2
-        };
-    }
-    
-    getMapStyles() {
-        return [
-            {
-                "featureType": "administrative",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#444444"
-                    }
-                ]
-            },
-            {
-                "featureType": "landscape",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "color": "#f2f2f2"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.business",
-                "elementType": "geometry.fill",
-                "stylers": [
-                    {
-                        "visibility": "on"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "on"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "saturation": -100
-                    },
-                    {
-                        "lightness": 45
-                    }
-                ]
-            },
-            {
-                "featureType": "road.highway",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "simplified"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.arterial",
-                "elementType": "labels.icon",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "transit",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "visibility": "on"
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "all",
-                "stylers": [
-                    {
-                        "color": "#b4d4e1"
-                    },
-                    {
-                        "visibility": "on"
-                    }
-                ]
-            }
-        ];
-    }
-    
-    addMapEvents(map) {
-        // Centrer la carte sur un restaurant quand on clique sur sa carte
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('view-details')) {
-                const restaurantCard = event.target.closest('.restaurant-card');
-                if (!restaurantCard) return;
-                
-                const restaurantName = restaurantCard.querySelector('h3').textContent;
-                const restaurant = this.restaurants.find(r => r.name === restaurantName);
-                
-                if (restaurant && map) {
-                    map.setCenter({ lat: restaurant.lat, lng: restaurant.lng });
-                    map.setZoom(16);
-                }
-            }
+        // Créer une icône personnalisée
+        return L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background-color: ${color}; width: 100%; height: 100%; border-radius: 50%; border: 2px solid white;"></div>`,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
         });
     }
     
-    loadGoogleMapsScript(elementId, restaurant = null) {
-        // Vérifier si le script est déjà en cours de chargement
-        if (document.querySelector('script[src*="maps.googleapis.com/maps/api/js"]')) {
+    loadLeafletScript(elementId, restaurant = null) {
+        // Vérifier si les scripts et styles sont déjà en cours de chargement
+        if (document.querySelector('link[href*="leaflet.css"]') && 
+            document.querySelector('script[src*="leaflet.js"]')) {
             return;
         }
         
@@ -349,12 +203,31 @@ class RestaurantMaps {
                     0% { transform: rotate(0deg); }
                     100% { transform: rotate(360deg); }
                 }
+                .custom-marker {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
             `;
             document.head.appendChild(style);
         }
         
-        // Créer une fonction globale pour initialiser la carte
-        window.initMap = () => {
+        // Charger la feuille de style Leaflet
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css';
+        link.integrity = 'sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==';
+        link.crossOrigin = '';
+        document.head.appendChild(link);
+        
+        // Charger le script Leaflet
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js';
+        script.integrity = 'sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==';
+        script.crossOrigin = '';
+        
+        // Quand le script est chargé, initialiser la carte
+        script.onload = () => {
             if (restaurant) {
                 this.initSingle(elementId, restaurant);
             } else {
@@ -362,11 +235,6 @@ class RestaurantMaps {
             }
         };
         
-        // Créer le script Google Maps
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAJZO7zRNKYWhH8nXg2JGCk3Ow6f1Hj0AE&callback=initMap`;
-        script.async = true;
-        script.defer = true;
         document.head.appendChild(script);
     }
     
