@@ -6,245 +6,44 @@
   <title>Top 5 des Meilleurs Restaurants de Paris</title>
   <link rel="stylesheet" href="css/maps.css">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f8f9fa;
-    }
+    body {font-family:'Segoe UI',sans-serif; line-height:1.6; color:#333; max-width:1200px; margin:0 auto; padding:20px; background-color:#f8f9fa;}
+    header {text-align:center; margin-bottom:40px; background-color:#fff; padding:20px; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.1);}
+    h1 {color:#2c3e50; margin-bottom:10px;}
+    .subtitle {color:#7f8c8d; font-size:1.2rem;}
+    .restaurant-container {display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;}
+    .restaurant-card {background-color:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; width:calc(100% - 20px); margin-bottom:30px; transition:transform 0.3s ease;}
+    .restaurant-card:hover {transform:translateY(-10px);}
+    .restaurant-image {height:250px; background-size:cover; background-position:center;}
+    .restaurant-content {padding:25px;}
+    .restaurant-header {display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;}
+    .restaurant-title {margin:0; color:#2c3e50; font-size:1.8rem;}
+    .restaurant-rating {background-color:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; display:flex; align-items:center; gap:5px;}
+    .star {color:#f1c40f;}
+    .restaurant-description {color:#555; margin-bottom:20px;}
+    .restaurant-info {display:flex; flex-direction:column; gap:10px; margin-bottom:20px;}
+    .info-item {display:flex; align-items:flex-start; gap:10px;}
+    .info-item i {width:20px; color:#3498db;}
+    .review {background-color:#f8f9fa; padding:20px; border-radius:8px; margin-top:20px; position:relative;}
+    .review::before {content:'\201C'; font-size:80px; color:#e0e0e0; position:absolute; top:-10px; left:10px; z-index:0;}
+    .review-content {position:relative; z-index:1; font-style:italic;}
+    .review-author {margin-top:15px; font-weight:bold; text-align:right;}
     
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    h1 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-    
-    .subtitle {
-      color: #7f8c8d;
-      font-size: 1.2rem;
-    }
-    
-    .restaurant-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-    }
-    
-    .restaurant-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: calc(100% - 20px);
-      margin-bottom: 30px;
-      transition: transform 0.3s ease;
-    }
-    
-    .restaurant-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .restaurant-image {
-      height: 250px;
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .restaurant-content {
-      padding: 25px;
-    }
-    
-    .restaurant-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-    
-    .restaurant-title {
-      margin: 0;
-      color: #2c3e50;
-      font-size: 1.8rem;
-    }
-    
-    .restaurant-rating {
-      background-color: #3498db;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .star {
-      color: #f1c40f;
-    }
-    
-    .restaurant-description {
-      color: #555;
-      margin-bottom: 20px;
-    }
-    
-    .restaurant-info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    
-    .info-item i {
-      width: 20px;
-      color: #3498db;
-    }
-    
-    .review {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-      position: relative;
-    }
-    
-    .review::before {
-      content: '\201C';
-      font-size: 80px;
-      color: #e0e0e0;
-      position: absolute;
-      top: -10px;
-      left: 10px;
-      z-index: 0;
-    }
-    
-    .review-content {
-      position: relative;
-      z-index: 1;
-      font-style: italic;
-    }
-    
-    .review-author {
-      margin-top: 15px;
-      font-weight: bold;
-      text-align: right;
-    }
-    
-    @media (min-width: 768px) {
-      .restaurant-card {
-        width: calc(50% - 20px);
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .restaurant-card {
-        width: calc(33.333% - 20px);
-      }
-    }
+    @media (min-width:768px) {.restaurant-card {width:calc(50% - 20px);}}
+    @media (min-width:1024px) {.restaurant-card {width:calc(33.333% - 20px);}}
 
-    .badge {
-      display: inline-block;
-      padding: 5px 10px;
-      background-color: #e0e0e0;
-      border-radius: 20px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-    }
-
-    .badge.cuisine {
-      background-color: #e74c3c;
-      color: white;
-    }
-    
-    .badge.ambiance {
-      background-color: #9b59b6;
-      color: white;
-    }
-    
-    .badge.prix {
-      background-color: #2ecc71;
-      color: white;
-    }
-
-    .visit-btn {
-      display: inline-block;
-      background-color: #3498db;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .visit-btn:hover {
-      background-color: #2980b9;
-    }
-
-    .tags {
-      margin-bottom: 15px;
-    }
-    
-    .section-title {
-      text-align: center;
-      margin: 50px 0 30px;
-      color: #2c3e50;
-      font-size: 2rem;
-      position: relative;
-    }
-    
-    .section-title::after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 4px;
-      background-color: #3498db;
-      margin: 15px auto 0;
-      border-radius: 2px;
-    }
-    
-    .map-section {
-      margin: 60px 0;
-    }
-    
-    .actions-container {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-    }
-    
-    .directions-btn {
-      display: inline-block;
-      background-color: #f1f1f1;
-      color: #333;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-    
-    .directions-btn:hover {
-      background-color: #e0e0e0;
-    }
+    .badge {display:inline-block; padding:5px 10px; background-color:#e0e0e0; border-radius:20px; margin-right:5px; margin-bottom:5px; font-size:0.9rem;}
+    .badge.cuisine {background-color:#e74c3c; color:white;}
+    .badge.ambiance {background-color:#9b59b6; color:white;}
+    .badge.prix {background-color:#2ecc71; color:white;}
+    .visit-btn {display:inline-block; background-color:#3498db; color:white; text-decoration:none; padding:10px 20px; border-radius:5px; font-weight:bold; transition:background-color 0.3s;}
+    .visit-btn:hover {background-color:#2980b9;}
+    .tags {margin-bottom:15px;}
+    .section-title {text-align:center; margin:50px 0 30px; color:#2c3e50; font-size:2rem; position:relative;}
+    .section-title::after {content:''; display:block; width:80px; height:4px; background-color:#3498db; margin:15px auto 0; border-radius:2px;}
+    .map-section {margin:60px 0;}
+    .actions-container {display:flex; gap:10px; margin-top:15px;}
+    .directions-btn {display:inline-block; background-color:#f1f1f1; color:#333; text-decoration:none; padding:10px 20px; border-radius:5px; font-weight:bold; transition:background-color 0.3s;}
+    .directions-btn:hover {background-color:#e0e0e0;}
   </style>
 </head>
 <body>
@@ -550,34 +349,17 @@
 
   <script src="js/maps.js"></script>
   <script>
-    // Message d'attente pour la carte
     document.addEventListener('DOMContentLoaded', function() {
       const mapLoading = document.querySelector('.map-loading');
       const mapElement = document.getElementById('map');
       
       if (mapLoading && mapElement) {
-        // Initialiser la carte sans l'API Google Maps (mode démo)
         setTimeout(() => {
           mapLoading.style.display = 'none';
           initMapWithoutAPI();
         }, 1500);
       }
       
-      // Simple interactive elements
-      document.querySelectorAll('.restaurant-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          if (!e.target.classList.contains('visit-btn') && !e.target.classList.contains('directions-btn')) {
-            const title = this.querySelector('.restaurant-title').textContent;
-            const restaurantName = title.split('.')[1].trim().toLowerCase()
-              .replace(/[^a-z0-9]/g, '-')
-              .replace(/\-+/g, '-');
-              
-            window.location.href = `restaurants/${restaurantName}.html`;
-          }
-        });
-      });
-
-      // Actions pour le bouton "Voir tous les restaurants"
       const showAllBtn = document.querySelector('.show-all-restaurants-btn');
       if (showAllBtn) {
         showAllBtn.addEventListener('click', () => {
