@@ -1,47 +1,113 @@
-# Top 5 des Meilleurs Restaurants de Paris
+# Top Restaurants Paris 🍽️
 
-Ce projet présente une page web interactive affichant les 5 meilleurs restaurants de Paris selon les notes et avis Google, basé sur le classement de Sunday.
+## Description du Projet
 
-## Contenu
+Top Restaurants Paris est un site web interactif présentant les 5 meilleurs restaurants de Paris, sélectionnés selon les notes Google. L'application offre une expérience utilisateur riche avec des fonctionnalités modernes et intuitives.
 
-La page présente pour chaque restaurant :
-- Sa note Google
-- Son type de cuisine
-- Une description détaillée
-- Ses informations pratiques (adresse, horaires, gamme de prix, téléphone)
-- Un avis client représentatif
-- Des fonctionnalités interactives simples
+### Fonctionnalités Principales
 
-## Restaurants présentés
+- 🗺️ **Carte Interactive Google Maps**
+  - Localisation des restaurants
+  - Marqueurs personnalisés
+  - Informations détaillées au survol
 
-1. **Kafkaf** (4.9★) - Restaurant de brunch au style Middle Eastern
-2. **L'Épicerie du Nord** (4.8★) - Restaurant indien authentique 
-3. **Saveurs d'Orient** (4.8★) - Restaurant de cuisine marocaine et libanaise
-4. **La Maison Mère** (4.7★) - Bistrot mi-parisien mi-new-yorkais
-5. **Dessance** (4.7★) - Restaurant gastronomique dans le Marais
+- 🔍 **Système de Filtrage Avancé**
+  - Filtrer par cuisine
+  - Filtrer par ambiance
+  - Filtrer par gamme de prix
+  - Réinitialisation facile des filtres
 
-## Fonctionnalités
+- 🌓 **Mode Sombre/Clair**
+  - Bascule intuitive
+  - Respect des préférences système
+  - Sauvegarde du thème
 
-- Design responsive s'adaptant à tous les appareils
-- Animation des cartes au survol
-- Alertes interactives lors des clics
-- Interface utilisateur intuitive
+- 📝 **Système d'Avis**
+  - Soumettre des avis
+  - Notation par étoiles
+  - Stockage local des avis
+  - Affichage de la note moyenne
 
-## Technologies utilisées
+- 📅 **Réservation de Table**
+  - Formulaire de réservation complet
+  - Validation des champs
+  - Confirmation de réservation
+  - Gestion des demandes spéciales
+
+### Restaurants Présentés
+
+1. **Kafkaf** - Cuisine Middle Eastern
+2. **L'Épicerie du Nord** - Cuisine Indienne
+3. **Saveurs d'Orient** - Cuisine Marocaine/Libanaise
+4. **La Maison Mère** - Cuisine Franco-Américaine
+5. **Dessance** - Restaurant Gastronomique
+
+## Technologies Utilisées
 
 - HTML5
 - CSS3
-- JavaScript
+- JavaScript (ES6+)
+- Google Maps API
+- LocalStorage
 
-## Voir le site
+## Installation et Configuration
 
-Vous pouvez voir le site en direct à l'adresse suivante : https://vizionereia.github.io/top-restaurants-paris/
+### Prérequis
 
-## Développement futur
+- Navigateur web moderne
+- Connexion Internet
+- Clé API Google Maps (recommandée)
 
-Nous prévoyons d'ajouter les fonctionnalités suivantes dans les prochaines versions :
-- Filtres par type de cuisine, quartier et prix
-- Système de réservation
-- Intégration de Google Maps pour chaque restaurant
-- Galerie de photos pour chaque restaurant
-- Plus de restaurants dans le classement
+### Étapes d'Installation
+
+1. Clonez le dépôt
+```bash
+git clone https://github.com/VizionereIA/top-restaurants-paris.git
+```
+
+2. Ouvrez `index.html` dans votre navigateur
+
+### Configuration Google Maps
+
+1. Remplacez `YOUR_API_KEY` dans `js/maps.js`
+2. Activez les API nécessaires dans votre console Google Cloud
+
+## Fonctionnement des Fonctionnalités
+
+### Filtrage des Restaurants
+- Utilisez les menus déroulants pour filtrer
+- Cliquez sur "Réinitialiser" pour tout afficher
+
+### Mode Sombre/Clair
+- Cliquez sur l'icône ☀️/🌙 en haut à droite
+- Le thème sera sauvegardé entre les sessions
+
+### Réservation
+- Remplissez le formulaire sur la page du restaurant
+- Tous les champs marqués * sont obligatoires
+- Une confirmation s'affichera après soumission
+
+## Contribution
+
+Les contributions sont les bienvenues ! Veuillez suivre ces étapes :
+1. Fork du projet
+2. Créez une branche de fonctionnalité
+3. Commitez vos modifications
+4. Push et créez une Pull Request
+
+## Problèmes Connus
+
+- Nécessite une clé API Google Maps en production
+- Stockage des avis et réservations limité au navigateur
+
+## Licence
+
+[Spécifiez votre licence, par exemple MIT]
+
+## Contact
+
+VizionereIA - [Votre email ou lien GitHub]
+
+---
+
+*Projet réalisé avec ❤️ à Paris*
