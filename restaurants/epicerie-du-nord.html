@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Épicerie du Nord - Restaurant Indien à Paris</title>
+  <link rel="stylesheet" href="../css/maps.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .back-link {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      color: #3498db;
+      text-decoration: none;
+    }
+    
+    .restaurant-main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .restaurant-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .restaurant-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .info-section {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    
+    .menu-section {
+      flex: 2;
+      min-width: 300px;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-right: 5px;
+      font-size: 0.9rem;
+    }
+
+    .badge.cuisine {
+      background-color: #e74c3c;
+      color: white;
+    }
+    
+    .badge.ambiance {
+      background-color: #9b59b6;
+      color: white;
+    }
+    
+    .badge.prix {
+      background-color: #2ecc71;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="back-link">&larr; Retour à la liste</a>
+    <h1>L'Épicerie du Nord</h1>
+    <p>Authentique cuisine indienne près de Gare du Nord</p>
+    <div style="display: inline-block; background-color: #3498db; color: white; padding: 8px 15px; border-radius: 20px; font-weight: bold;">
+      <span>4.8</span>
+      <span style="color: #f1c40f;">★</span>
+    </div>
+    <div style="margin-top: 15px;">
+      <span class="badge cuisine">Indien</span>
+      <span class="badge ambiance">Authentique</span>
+      <span class="badge prix">€€</span>
+    </div>
+  </header>
+  
+  <img src="https://source.unsplash.com/1200x400/?indian,food" alt="L'Épicerie du Nord" class="restaurant-main-image">
+  
+  <div class="restaurant-content">
+    <div class="restaurant-info">
+      <div class="info-section">
+        <h2>Informations</h2>
+        <p><strong>Adresse:</strong> Quartier Gare du Nord, 75010 Paris</p>
+        <p><strong>Horaires:</strong> Lun-Dim: 11h30-15h00, 18h30-23h00</p>
+        <p><strong>Téléphone:</strong> 01 XX XX XX XX</p>
+        <p><strong>Prix moyen:</strong> 15€-25€</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Gare+du+Nord+75010+Paris" target="_blank" style="display: inline-block; background-color: #3498db; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; margin-top: 10px;">Obtenir un itinéraire</a>
+      </div>
+      
+      <div class="info-section">
+        <h2>Nous trouver</h2>
+        <div class="map-container restaurant-page">
+          <div class="map-loading">
+            <div class="map-loading-spinner"></div>
+          </div>
+          <div id="restaurant-map"></div>
+          <button class="center-map-btn" title="Centrer la carte">📍</button>
+        </div>
+      </div>
+      
+      <div class="info-section">
+        <h2>À propos</h2>
+        <p>L'Épicerie du Nord propose une authentique expérience de la cuisine indienne à deux pas de la Gare du Nord. Situé dans un quartier cosmopolite, ce restaurant vous transporte immédiatement dans l'ambiance des meilleurs restaurants de New Delhi.</p>
+        <p>Les plats sont préparés avec des épices fraîchement importées et des recettes traditionnelles. Le chef, originaire du Rajasthan, apporte son savoir-faire et son authenticité à chaque assiette.</p>
+      </div>
+    </div>
+    
+    <div class="info-section menu-section">
+      <h2>Notre Menu</h2>
+      
+      <div style="margin-bottom: 30px;">
+        <h3>Entrées</h3>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <div>
+            <div style="font-weight: bold;">Samosas aux légumes</div>
+            <div style="color: #7f8c8d; font-size: 0.9rem;">Chaussons frits garnis de pommes de terre, petits pois et épices</div>
+          </div>
+          <div style="color: #3498db; font-weight: bold;">7€</div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <div>
+            <div style="font-weight: bold;">Pakoras d'oignons</div>
+            <div style="color: #7f8c8d; font-size: 0.9rem;">Beignets d'oignons croustillants à la farine de pois chiches</div>
+          </div>
+          <div style="color: #3498db; font-weight: bold;">6€</div>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 30px;">
+        <h3>Plats Principaux</h3>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <div>
+            <div style="font-weight: bold;">Poulet Tikka Masala</div>
+            <div style="color: #7f8c8d; font-size: 0.9rem;">Poulet mariné, grillé au tandoor et mijoté dans une sauce tomate et crème</div>
+          </div>
+          <div style="color: #3498db; font-weight: bold;">18€</div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <div>
+            <div style="font-weight: bold;">Curry d'agneau</div>
+            <div style="color: #7f8c8d; font-size: 0.9rem;">Agneau tendre mijoté avec oignons, tomates et épices</div>
+          </div>
+          <div style="color: #3498db; font-weight: bold;">19€</div>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+          <div>
+            <div style="font-weight: bold;">Chana Masala (V)</div>
+            <div style="color: #7f8c8d; font-size: 0.9rem;">Curry de pois chiches aux épices aromatiques</div>
+          </div>
+          <div style="color: #3498db; font-weight: bold;">15€</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/maps.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mapLoading = document.querySelector('.map-loading');
+      if (mapLoading) {
+        setTimeout(() => {
+          mapLoading.style.display = 'none';
+          initSingleRestaurantMap('epicerie-du-nord');
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
