@@ -1,0 +1,69 @@
+                    <span>Thé</span>
+                    <span>4€</span>
+                </div>
+                <div class="menu-item">
+                    <span>Jus frais</span>
+                    <span>6€</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <div class="reviews-header">
+                <h2 class="reviews-title">Avis et Commentaires</h2>
+                <div id="average-rating">Note moyenne : 4.8/5</div>
+            </div>
+
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="review-name">Votre nom</label>
+                    <input type="text" id="review-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="review-email">Email (optionnel)</label>
+                    <input type="email" id="review-email">
+                </div>
+
+                <div class="form-group">
+                    <label>Votre note</label>
+                    <div class="rating-input">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="review-comment">Votre commentaire</label>
+                    <textarea id="review-comment" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" id="submit-review">Envoyer mon avis</button>
+            </form>
+
+            <div id="reviews-list">
+                <!-- Les avis seront chargés dynamiquement via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/theme-toggle.js" type="module"></script>
+    <script src="../js/reviews.js" type="module"></script>
+    <script>
+        // Gestion de la galerie d'images
+        document.querySelectorAll('.gallery-thumbnails img').forEach(img => {
+            img.addEventListener('click', function() {
+                document.getElementById('main-image').src = this.src;
+            });
+        });
+    </script>
+</body>
+</html>
