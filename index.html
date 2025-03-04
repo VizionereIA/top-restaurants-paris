@@ -4,203 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Top 5 des Meilleurs Restaurants de Paris</title>
+  <link rel="stylesheet" href="css/maps.css">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f8f9fa;
-    }
+    body {font-family:'Segoe UI',sans-serif; line-height:1.6; color:#333; max-width:1200px; margin:0 auto; padding:20px; background-color:#f8f9fa;}
+    header {text-align:center; margin-bottom:40px; background-color:#fff; padding:20px; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.1);}
+    h1 {color:#2c3e50; margin-bottom:10px;}
+    .subtitle {color:#7f8c8d; font-size:1.2rem;}
+    .restaurant-container {display:flex; flex-wrap:wrap; justify-content:space-between; gap:30px;}
+    .restaurant-card {background-color:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); overflow:hidden; width:calc(100% - 20px); margin-bottom:30px; transition:transform 0.3s ease;}
+    .restaurant-card:hover {transform:translateY(-10px);}
+    .restaurant-image {height:250px; background-size:cover; background-position:center;}
+    .restaurant-content {padding:25px;}
+    .restaurant-header {display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;}
+    .restaurant-title {margin:0; color:#2c3e50; font-size:1.8rem;}
+    .restaurant-rating {background-color:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold; display:flex; align-items:center; gap:5px;}
+    .star {color:#f1c40f;}
+    .restaurant-description {color:#555; margin-bottom:20px;}
+    .restaurant-info {display:flex; flex-direction:column; gap:10px; margin-bottom:20px;}
+    .info-item {display:flex; align-items:flex-start; gap:10px;}
+    .info-item i {width:20px; color:#3498db;}
+    .review {background-color:#f8f9fa; padding:20px; border-radius:8px; margin-top:20px; position:relative;}
+    .review::before {content:'\201C'; font-size:80px; color:#e0e0e0; position:absolute; top:-10px; left:10px; z-index:0;}
+    .review-content {position:relative; z-index:1; font-style:italic;}
+    .review-author {margin-top:15px; font-weight:bold; text-align:right;}
     
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    h1 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-    
-    .subtitle {
-      color: #7f8c8d;
-      font-size: 1.2rem;
-    }
-    
-    .restaurant-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
-    }
-    
-    .restaurant-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: calc(100% - 20px);
-      margin-bottom: 30px;
-      transition: transform 0.3s ease;
-    }
-    
-    .restaurant-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .restaurant-image {
-      height: 250px;
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .restaurant-content {
-      padding: 25px;
-    }
-    
-    .restaurant-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 15px;
-    }
-    
-    .restaurant-title {
-      margin: 0;
-      color: #2c3e50;
-      font-size: 1.8rem;
-    }
-    
-    .restaurant-rating {
-      background-color: #3498db;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    .star {
-      color: #f1c40f;
-    }
-    
-    .restaurant-description {
-      color: #555;
-      margin-bottom: 20px;
-    }
-    
-    .restaurant-info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    
-    .info-item i {
-      width: 20px;
-      color: #3498db;
-    }
-    
-    .review {
-      background-color: #f8f9fa;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-      position: relative;
-    }
-    
-    .review::before {
-      content: '\201C';
-      font-size: 80px;
-      color: #e0e0e0;
-      position: absolute;
-      top: -10px;
-      left: 10px;
-      z-index: 0;
-    }
-    
-    .review-content {
-      position: relative;
-      z-index: 1;
-      font-style: italic;
-    }
-    
-    .review-author {
-      margin-top: 15px;
-      font-weight: bold;
-      text-align: right;
-    }
-    
-    @media (min-width: 768px) {
-      .restaurant-card {
-        width: calc(50% - 20px);
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .restaurant-card {
-        width: calc(33.333% - 20px);
-      }
-    }
+    @media (min-width:768px) {.restaurant-card {width:calc(50% - 20px);}}
+    @media (min-width:1024px) {.restaurant-card {width:calc(33.333% - 20px);}}
 
-    .badge {
-      display: inline-block;
-      padding: 5px 10px;
-      background-color: #e0e0e0;
-      border-radius: 20px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      font-size: 0.9rem;
-    }
-
-    .badge.cuisine {
-      background-color: #e74c3c;
-      color: white;
-    }
-    
-    .badge.ambiance {
-      background-color: #9b59b6;
-      color: white;
-    }
-    
-    .badge.prix {
-      background-color: #2ecc71;
-      color: white;
-    }
-
-    .visit-btn {
-      display: inline-block;
-      background-color: #3498db;
-      color: white;
-      text-decoration: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .visit-btn:hover {
-      background-color: #2980b9;
-    }
-
-    .tags {
-      margin-bottom: 15px;
-    }
+    .badge {display:inline-block; padding:5px 10px; background-color:#e0e0e0; border-radius:20px; margin-right:5px; margin-bottom:5px; font-size:0.9rem;}
+    .badge.cuisine {background-color:#e74c3c; color:white;}
+    .badge.ambiance {background-color:#9b59b6; color:white;}
+    .badge.prix {background-color:#2ecc71; color:white;}
+    .visit-btn {display:inline-block; background-color:#3498db; color:white; text-decoration:none; padding:10px 20px; border-radius:5px; font-weight:bold; transition:background-color 0.3s;}
+    .visit-btn:hover {background-color:#2980b9;}
+    .tags {margin-bottom:15px;}
+    .section-title {text-align:center; margin:50px 0 30px; color:#2c3e50; font-size:2rem; position:relative;}
+    .section-title::after {content:''; display:block; width:80px; height:4px; background-color:#3498db; margin:15px auto 0; border-radius:2px;}
+    .map-section {margin:60px 0;}
+    .actions-container {display:flex; gap:10px; margin-top:15px;}
+    .directions-btn {display:inline-block; background-color:#f1f1f1; color:#333; text-decoration:none; padding:10px 20px; border-radius:5px; font-weight:bold; transition:background-color 0.3s;}
+    .directions-btn:hover {background-color:#e0e0e0;}
   </style>
 </head>
 <body>
@@ -208,286 +51,321 @@
     <h1>Top 5 des Meilleurs Restaurants de Paris</h1>
     <p class="subtitle">Selon les notes et avis Google - Classement Sunday</p>
   </header>
+  
+  <!-- Section Carte -->
+  <section class="map-section">
+    <h2 class="section-title">Carte des restaurants</h2>
+    
+    <div class="map-container">
+      <div class="map-loading">
+        <div class="map-loading-spinner"></div>
+      </div>
+      <div id="map"></div>
+      <button class="show-all-restaurants-btn">Voir tous les restaurants</button>
+    </div>
+  </section>
 
-  <div class="restaurant-container">
-    <!-- Restaurant 1 -->
-    <div class="restaurant-card">
-      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?restaurant,food');"></div>
-      <div class="restaurant-content">
-        <div class="restaurant-header">
-          <h2 class="restaurant-title">1. Kafkaf</h2>
-          <div class="restaurant-rating">
-            <span>4.9</span>
-            <span class="star">★</span>
-          </div>
-        </div>
-        
-        <div class="tags">
-          <span class="badge cuisine">Middle Eastern</span>
-          <span class="badge ambiance">Cozy</span>
-          <span class="badge prix">€€</span>
-        </div>
-        
-        <p class="restaurant-description">
-          Kafkaf est couronné meilleur restaurant de Paris, célèbre pour ses brunchs gourmands et originaux qui mêlent saveurs du Moyen-Orient et inspirations créatives dans un cadre chaleureux et instagrammable.
-        </p>
-        
-        <div class="restaurant-info">
-          <div class="info-item">
-            <i>📍</i>
-            <span>7 Rue Keller, 75011 Paris</span>
-          </div>
-          <div class="info-item">
-            <i>🕒</i>
-            <span>Mer-Dim: 10h00-16h00</span>
-          </div>
-          <div class="info-item">
-            <i>💶</i>
-            <span>Brunch: 20€-30€</span>
-          </div>
-          <div class="info-item">
-            <i>📞</i>
-            <span>01 43 55 77 52</span>
-          </div>
-        </div>
-        
-        <div class="review">
-          <p class="review-content">
-            "C'est undoubtement l'un des meilleurs brunchs que nous avons eu l'occasion de tester pour vous ! La décoration du restaurant est très cosy, avec des tons pastel chaleureux, des compositions de fleurs séchées et des néons. Il est certain qu'on y va pour manger essentiellement, mais le lieu reste indéniablement Instagrammable."
-          </p>
-          <p class="review-author">- Meilleur-Brunch.com</p>
-        </div>
-        
-        <a href="#" class="visit-btn">Voir le menu</a>
-      </div>
-    </div>
+  <!-- Liste des restaurants -->
+  <section>
+    <h2 class="section-title">Nos 5 restaurants recommandés</h2>
     
-    <!-- Restaurant 2 -->
-    <div class="restaurant-card">
-      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?indian,restaurant');"></div>
-      <div class="restaurant-content">
-        <div class="restaurant-header">
-          <h2 class="restaurant-title">2. L'Épicerie du Nord</h2>
-          <div class="restaurant-rating">
-            <span>4.8</span>
-            <span class="star">★</span>
+    <div class="restaurant-container">
+      <!-- Restaurant 1 -->
+      <div class="restaurant-card">
+        <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?restaurant,food');"></div>
+        <div class="restaurant-content">
+          <div class="restaurant-header">
+            <h2 class="restaurant-title">1. Kafkaf</h2>
+            <div class="restaurant-rating">
+              <span>4.9</span>
+              <span class="star">★</span>
+            </div>
           </div>
-        </div>
-        
-        <div class="tags">
-          <span class="badge cuisine">Indien</span>
-          <span class="badge ambiance">Authentique</span>
-          <span class="badge prix">€€</span>
-        </div>
-        
-        <p class="restaurant-description">
-          Situé près de la Gare du Nord, ce restaurant indien offre un véritable dépaysement culinaire avec des plats authentiques et savoureux servis dans un cadre chaleureux.
-        </p>
-        
-        <div class="restaurant-info">
-          <div class="info-item">
-            <i>📍</i>
-            <span>Quartier Gare du Nord, 75010 Paris</span>
+          
+          <div class="tags">
+            <span class="badge cuisine">Middle Eastern</span>
+            <span class="badge ambiance">Cozy</span>
+            <span class="badge prix">€€</span>
           </div>
-          <div class="info-item">
-            <i>🕒</i>
-            <span>Lun-Dim: 11h30-15h00, 18h30-23h00</span>
-          </div>
-          <div class="info-item">
-            <i>💶</i>
-            <span>Plats: 15€-25€</span>
-          </div>
-          <div class="info-item">
-            <i>📞</i>
-            <span>01 XX XX XX XX</span>
-          </div>
-        </div>
-        
-        <div class="review">
-          <p class="review-content">
-            "Très bon restaurant indien près de la gare du Nord. Dépaysement total quand on y entre! L'accueil est impeccable. La nourriture est très bonne avec des épices authentiques et des plats généreux. Une adresse incontournable pour les amateurs de cuisine indienne."
+          
+          <p class="restaurant-description">
+            Kafkaf est couronné meilleur restaurant de Paris, célèbre pour ses brunchs gourmands et originaux qui mêlent saveurs du Moyen-Orient et inspirations créatives dans un cadre chaleureux et instagrammable.
           </p>
-          <p class="review-author">- Avis Google</p>
+          
+          <div class="restaurant-info">
+            <div class="info-item">
+              <i>📍</i>
+              <span>7 Rue Keller, 75011 Paris</span>
+            </div>
+            <div class="info-item">
+              <i>🕒</i>
+              <span>Mer-Dim: 10h00-16h00</span>
+            </div>
+            <div class="info-item">
+              <i>💶</i>
+              <span>Brunch: 20€-30€</span>
+            </div>
+            <div class="info-item">
+              <i>📞</i>
+              <span>01 43 55 77 52</span>
+            </div>
+          </div>
+          
+          <div class="review">
+            <p class="review-content">
+              "C'est undoubtement l'un des meilleurs brunchs que nous avons eu l'occasion de tester pour vous ! La décoration du restaurant est très cosy, avec des tons pastel chaleureux, des compositions de fleurs séchées et des néons. Il est certain qu'on y va pour manger essentiellement, mais le lieu reste indéniablement Instagrammable."
+            </p>
+            <p class="review-author">- Meilleur-Brunch.com</p>
+          </div>
+          
+          <div class="actions-container">
+            <a href="restaurants/kafkaf.html" class="visit-btn">Voir le menu</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=7+Rue+Keller+75011+Paris" target="_blank" class="directions-btn">Itinéraire</a>
+          </div>
         </div>
-        
-        <a href="#" class="visit-btn">Voir le menu</a>
+      </div>
+      
+      <!-- Restaurant 2 -->
+      <div class="restaurant-card">
+        <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?indian,restaurant');"></div>
+        <div class="restaurant-content">
+          <div class="restaurant-header">
+            <h2 class="restaurant-title">2. L'Épicerie du Nord</h2>
+            <div class="restaurant-rating">
+              <span>4.8</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          
+          <div class="tags">
+            <span class="badge cuisine">Indien</span>
+            <span class="badge ambiance">Authentique</span>
+            <span class="badge prix">€€</span>
+          </div>
+          
+          <p class="restaurant-description">
+            Situé près de la Gare du Nord, ce restaurant indien offre un véritable dépaysement culinaire avec des plats authentiques et savoureux servis dans un cadre chaleureux.
+          </p>
+          
+          <div class="restaurant-info">
+            <div class="info-item">
+              <i>📍</i>
+              <span>Quartier Gare du Nord, 75010 Paris</span>
+            </div>
+            <div class="info-item">
+              <i>🕒</i>
+              <span>Lun-Dim: 11h30-15h00, 18h30-23h00</span>
+            </div>
+            <div class="info-item">
+              <i>💶</i>
+              <span>Plats: 15€-25€</span>
+            </div>
+            <div class="info-item">
+              <i>📞</i>
+              <span>01 XX XX XX XX</span>
+            </div>
+          </div>
+          
+          <div class="review">
+            <p class="review-content">
+              "Très bon restaurant indien près de la gare du Nord. Dépaysement total quand on y entre! L'accueil est impeccable. La nourriture est très bonne avec des épices authentiques et des plats généreux. Une adresse incontournable pour les amateurs de cuisine indienne."
+            </p>
+            <p class="review-author">- Avis Google</p>
+          </div>
+          
+          <div class="actions-container">
+            <a href="restaurants/epicerie-du-nord.html" class="visit-btn">Voir le menu</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Gare+du+Nord+75010+Paris" target="_blank" class="directions-btn">Itinéraire</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Restaurant 3 -->
+      <div class="restaurant-card">
+        <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?moroccan,food');"></div>
+        <div class="restaurant-content">
+          <div class="restaurant-header">
+            <h2 class="restaurant-title">3. Saveurs d'Orient</h2>
+            <div class="restaurant-rating">
+              <span>4.8</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          
+          <div class="tags">
+            <span class="badge cuisine">Marocain/Libanais</span>
+            <span class="badge ambiance">Élégant</span>
+            <span class="badge prix">€€</span>
+          </div>
+          
+          <p class="restaurant-description">
+            Situé dans le célèbre Passage des Panoramas, Les Saveurs de l'Orient propose une délicieuse fusion de cuisines marocaine et libanaise dans un cadre élégant et chaleureux.
+          </p>
+          
+          <div class="restaurant-info">
+            <div class="info-item">
+              <i>📍</i>
+              <span>Passage des Panoramas, 75002 Paris</span>
+            </div>
+            <div class="info-item">
+              <i>🕒</i>
+              <span>Lun-Sam: 12h00-14h30, 19h00-22h30</span>
+            </div>
+            <div class="info-item">
+              <i>💶</i>
+              <span>Plats: 18€-28€</span>
+            </div>
+            <div class="info-item">
+              <i>📞</i>
+              <span>01 42 21 55 25</span>
+            </div>
+          </div>
+          
+          <div class="review">
+            <p class="review-content">
+              "Pour les parisiens amateurs de cuisine orientale, Les Saveurs de l'Orient est le rendez-vous à ne pas manquer ! On y déguste de délicieuses spécialités orientales dans un cadre agréable et authentique en plein Paris. Très bon couscous servi avec générosité. Je recommande pour les adeptes de cuisine orientale."
+            </p>
+            <p class="review-author">- Newtable.com</p>
+          </div>
+          
+          <div class="actions-container">
+            <a href="restaurants/saveurs-orient.html" class="visit-btn">Voir le menu</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Passage+des+Panoramas+75002+Paris" target="_blank" class="directions-btn">Itinéraire</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Restaurant 4 -->
+      <div class="restaurant-card">
+        <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?bistro,paris');"></div>
+        <div class="restaurant-content">
+          <div class="restaurant-header">
+            <h2 class="restaurant-title">4. La Maison Mère</h2>
+            <div class="restaurant-rating">
+              <span>4.7</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          
+          <div class="tags">
+            <span class="badge cuisine">Franco-Américain</span>
+            <span class="badge ambiance">Tendance</span>
+            <span class="badge prix">€€-€€€</span>
+          </div>
+          
+          <p class="restaurant-description">
+            Situé dans le quartier SoPi (Sud de Pigalle), La Maison Mère est un bistrot mi-parisien mi-new-yorkais offrant une cuisine créative dans un cadre industriel chic des années 60.
+          </p>
+          
+          <div class="restaurant-info">
+            <div class="info-item">
+              <i>📍</i>
+              <span>7 rue Mayran, 75009 Paris</span>
+            </div>
+            <div class="info-item">
+              <i>🕒</i>
+              <span>Lun-Dim: 12h00-15h00, 19h00-23h00</span>
+            </div>
+            <div class="info-item">
+              <i>💶</i>
+              <span>Plats: 20€-35€</span>
+            </div>
+            <div class="info-item">
+              <i>📞</i>
+              <span>01 42 80 03 02</span>
+            </div>
+          </div>
+          
+          <div class="review">
+            <p class="review-content">
+              "Nous avons adoré ce bel hôtel à une courte distance de marche de la Gare de l'Est et d'un superbe terrain de jeu. L'ambiance est là, avec une jeunesse chic et choc qui se presse dans ce lieu au style industriel et chaleureux. La carte est variée et les plats sont vraiment savoureux."
+            </p>
+            <p class="review-author">- Hotels.com</p>
+          </div>
+          
+          <div class="actions-container">
+            <a href="restaurants/maison-mere.html" class="visit-btn">Voir le menu</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=7+rue+Mayran+75009+Paris" target="_blank" class="directions-btn">Itinéraire</a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Restaurant 5 -->
+      <div class="restaurant-card">
+        <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?gourmet,restaurant');"></div>
+        <div class="restaurant-content">
+          <div class="restaurant-header">
+            <h2 class="restaurant-title">5. Dessance</h2>
+            <div class="restaurant-rating">
+              <span>4.7</span>
+              <span class="star">★</span>
+            </div>
+          </div>
+          
+          <div class="tags">
+            <span class="badge cuisine">Gastronomique</span>
+            <span class="badge ambiance">Design</span>
+            <span class="badge prix">€€€</span>
+          </div>
+          
+          <p class="restaurant-description">
+            Situé dans le Marais, Dessance est un restaurant gastronomique unique qui a remporté le Paris Design Award. Il propose des menus dégustation Terre & Mer ou Végétariens dans un cadre exceptionnel au sein d'un hôtel particulier du XVIIe siècle.
+          </p>
+          
+          <div class="restaurant-info">
+            <div class="info-item">
+              <i>📍</i>
+              <span>Le Marais, 75003 Paris</span>
+            </div>
+            <div class="info-item">
+              <i>🕒</i>
+              <span>Mar-Sam: 12h00-14h00, 19h00-22h00</span>
+            </div>
+            <div class="info-item">
+              <i>💶</i>
+              <span>Menus: 45€-90€</span>
+            </div>
+            <div class="info-item">
+              <i>📞</i>
+              <span>01 42 77 23 62</span>
+            </div>
+          </div>
+          
+          <div class="review">
+            <p class="review-content">
+              "Avec Dessance, Philippe Baranes offre un cocon unique où le temps s'arrête : des menus dégustation Terre & Mer ou Végétariens, une cuisine élégante et audacieuse, des accords de boissons et un cadre exceptionnel qui a remporté le Paris Design Award dans un magnifique hôtel particulier du XVIIe siècle dans le Marais."
+            </p>
+            <p class="review-author">- Dessance.com</p>
+          </div>
+          
+          <div class="actions-container">
+            <a href="restaurants/dessance.html" class="visit-btn">Voir le menu</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Marais+75003+Paris" target="_blank" class="directions-btn">Itinéraire</a>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <!-- Restaurant 3 -->
-    <div class="restaurant-card">
-      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?moroccan,food');"></div>
-      <div class="restaurant-content">
-        <div class="restaurant-header">
-          <h2 class="restaurant-title">3. Saveurs d'Orient</h2>
-          <div class="restaurant-rating">
-            <span>4.8</span>
-            <span class="star">★</span>
-          </div>
-        </div>
-        
-        <div class="tags">
-          <span class="badge cuisine">Marocain/Libanais</span>
-          <span class="badge ambiance">Élégant</span>
-          <span class="badge prix">€€</span>
-        </div>
-        
-        <p class="restaurant-description">
-          Situé dans le célèbre Passage des Panoramas, Les Saveurs de l'Orient propose une délicieuse fusion de cuisines marocaine et libanaise dans un cadre élégant et chaleureux.
-        </p>
-        
-        <div class="restaurant-info">
-          <div class="info-item">
-            <i>📍</i>
-            <span>Passage des Panoramas, 75002 Paris</span>
-          </div>
-          <div class="info-item">
-            <i>🕒</i>
-            <span>Lun-Sam: 12h00-14h30, 19h00-22h30</span>
-          </div>
-          <div class="info-item">
-            <i>💶</i>
-            <span>Plats: 18€-28€</span>
-          </div>
-          <div class="info-item">
-            <i>📞</i>
-            <span>01 42 21 55 25</span>
-          </div>
-        </div>
-        
-        <div class="review">
-          <p class="review-content">
-            "Pour les parisiens amateurs de cuisine orientale, Les Saveurs de l'Orient est le rendez-vous à ne pas manquer ! On y déguste de délicieuses spécialités orientales dans un cadre agréable et authentique en plein Paris. Très bon couscous servi avec générosité. Je recommande pour les adeptes de cuisine orientale."
-          </p>
-          <p class="review-author">- Newtable.com</p>
-        </div>
-        
-        <a href="#" class="visit-btn">Voir le menu</a>
-      </div>
-    </div>
-    
-    <!-- Restaurant 4 -->
-    <div class="restaurant-card">
-      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?bistro,paris');"></div>
-      <div class="restaurant-content">
-        <div class="restaurant-header">
-          <h2 class="restaurant-title">4. La Maison Mère</h2>
-          <div class="restaurant-rating">
-            <span>4.7</span>
-            <span class="star">★</span>
-          </div>
-        </div>
-        
-        <div class="tags">
-          <span class="badge cuisine">Franco-Américain</span>
-          <span class="badge ambiance">Tendance</span>
-          <span class="badge prix">€€-€€€</span>
-        </div>
-        
-        <p class="restaurant-description">
-          Situé dans le quartier SoPi (Sud de Pigalle), La Maison Mère est un bistrot mi-parisien mi-new-yorkais offrant une cuisine créative dans un cadre industriel chic des années 60.
-        </p>
-        
-        <div class="restaurant-info">
-          <div class="info-item">
-            <i>📍</i>
-            <span>7 rue Mayran, 75009 Paris</span>
-          </div>
-          <div class="info-item">
-            <i>🕒</i>
-            <span>Lun-Dim: 12h00-15h00, 19h00-23h00</span>
-          </div>
-          <div class="info-item">
-            <i>💶</i>
-            <span>Plats: 20€-35€</span>
-          </div>
-          <div class="info-item">
-            <i>📞</i>
-            <span>01 42 80 03 02</span>
-          </div>
-        </div>
-        
-        <div class="review">
-          <p class="review-content">
-            "Nous avons adoré ce bel hôtel à une courte distance de marche de la Gare de l'Est et d'un superbe terrain de jeu. L'ambiance est là, avec une jeunesse chic et choc qui se presse dans ce lieu au style industriel et chaleureux. La carte est variée et les plats sont vraiment savoureux."
-          </p>
-          <p class="review-author">- Hotels.com</p>
-        </div>
-        
-        <a href="#" class="visit-btn">Voir le menu</a>
-      </div>
-    </div>
-    
-    <!-- Restaurant 5 -->
-    <div class="restaurant-card">
-      <div class="restaurant-image" style="background-image: url('https://source.unsplash.com/800x450/?gourmet,restaurant');"></div>
-      <div class="restaurant-content">
-        <div class="restaurant-header">
-          <h2 class="restaurant-title">5. Dessance</h2>
-          <div class="restaurant-rating">
-            <span>4.7</span>
-            <span class="star">★</span>
-          </div>
-        </div>
-        
-        <div class="tags">
-          <span class="badge cuisine">Gastronomique</span>
-          <span class="badge ambiance">Design</span>
-          <span class="badge prix">€€€</span>
-        </div>
-        
-        <p class="restaurant-description">
-          Situé dans le Marais, Dessance est un restaurant gastronomique unique qui a remporté le Paris Design Award. Il propose des menus dégustation Terre & Mer ou Végétariens dans un cadre exceptionnel au sein d'un hôtel particulier du XVIIe siècle.
-        </p>
-        
-        <div class="restaurant-info">
-          <div class="info-item">
-            <i>📍</i>
-            <span>Le Marais, 75003 Paris</span>
-          </div>
-          <div class="info-item">
-            <i>🕒</i>
-            <span>Mar-Sam: 12h00-14h00, 19h00-22h00</span>
-          </div>
-          <div class="info-item">
-            <i>💶</i>
-            <span>Menus: 45€-90€</span>
-          </div>
-          <div class="info-item">
-            <i>📞</i>
-            <span>01 42 77 23 62</span>
-          </div>
-        </div>
-        
-        <div class="review">
-          <p class="review-content">
-            "Avec Dessance, Philippe Baranes offre un cocon unique où le temps s'arrête : des menus dégustation Terre & Mer ou Végétariens, une cuisine élégante et audacieuse, des accords de boissons et un cadre exceptionnel qui a remporté le Paris Design Award dans un magnifique hôtel particulier du XVIIe siècle dans le Marais."
-          </p>
-          <p class="review-author">- Dessance.com</p>
-        </div>
-        
-        <a href="#" class="visit-btn">Voir le menu</a>
-      </div>
-    </div>
-  </div>
+  </section>
 
+  <script src="js/maps.js"></script>
   <script>
-    // Simple interactive elements
-    document.querySelectorAll('.restaurant-card').forEach(card => {
-      card.addEventListener('click', function(e) {
-        if (!e.target.classList.contains('visit-btn')) {
-          const title = this.querySelector('.restaurant-title').textContent;
-          alert(`Vous avez sélectionné ${title}`);
-        }
-      });
-    });
-
-    document.querySelectorAll('.visit-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const title = this.closest('.restaurant-card').querySelector('.restaurant-title').textContent;
-        alert(`Vous allez voir le menu de ${title}`);
-      });
+    document.addEventListener('DOMContentLoaded', function() {
+      const mapLoading = document.querySelector('.map-loading');
+      const mapElement = document.getElementById('map');
+      
+      if (mapLoading && mapElement) {
+        setTimeout(() => {
+          mapLoading.style.display = 'none';
+          initMapWithoutAPI();
+        }, 1500);
+      }
+      
+      const showAllBtn = document.querySelector('.show-all-restaurants-btn');
+      if (showAllBtn) {
+        showAllBtn.addEventListener('click', () => {
+          window.mapsAPI.fitMapToMarkers();
+        });
+      }
     });
   </script>
 </body>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dessance - Restaurant Gastronomique dans le Marais</title>
+  <link rel="stylesheet" href="../css/maps.css">
+  <style>
+    body {font-family:'Segoe UI',sans-serif; line-height:1.6; color:#333; max-width:1200px; margin:0 auto; padding:20px; background-color:#f8f9fa;}
+    header {text-align:center; margin-bottom:40px; background-color:#fff; padding:20px; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.1); position:relative;}
+    .back-link {position:absolute; left:20px; top:20px; color:#3498db; text-decoration:none;}
+    .restaurant-main-image {width:100%; height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;}
+    .restaurant-content {display:flex; flex-wrap:wrap; gap:30px;}
+    .restaurant-info {flex:1; min-width:300px;}
+    .info-section {background-color:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); padding:25px; margin-bottom:30px;}
+    .menu-section {flex:2; min-width:300px;}
+    .badge {display:inline-block; padding:5px 10px; border-radius:20px; margin-right:5px; font-size:0.9rem;}
+    .badge.cuisine {background-color:#e74c3c; color:white;}
+    .badge.ambiance {background-color:#9b59b6; color:white;}
+    .badge.prix {background-color:#2ecc71; color:white;}
+    .menu-item {display:flex; justify-content:space-between; margin-bottom:15px; padding-bottom:15px; border-bottom:1px solid #eee;}
+    @media (max-width:768px) {.restaurant-content {flex-direction:column;}}
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../index.html" class="back-link">&larr; Retour</a>
+    <h1>Dessance</h1>
+    <p>Restaurant gastronomique primé dans le Marais</p>
+    <div style="display:inline-block; background-color:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold;">
+      <span>4.7</span>
+      <span style="color:#f1c40f;">★</span>
+    </div>
+    <div style="margin-top:15px;">
+      <span class="badge cuisine">Gastronomique</span>
+      <span class="badge ambiance">Design</span>
+      <span class="badge prix">€€€</span>
+    </div>
+  </header>
+  
+  <img src="https://source.unsplash.com/1200x400/?gourmet,fine-dining" class="restaurant-main-image">
+  
+  <div class="restaurant-content">
+    <div class="restaurant-info">
+      <div class="info-section">
+        <h2>Informations</h2>
+        <p><strong>Adresse:</strong> Le Marais, 75003 Paris</p>
+        <p><strong>Horaires:</strong> Mar-Sam: 12h00-14h00, 19h00-22h00</p>
+        <p><strong>Téléphone:</strong> 01 42 77 23 62</p>
+        <p><strong>Prix moyen:</strong> Menus 45€-90€</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Marais+75003+Paris" target="_blank" style="display:inline-block; background-color:#3498db; color:white; text-decoration:none; padding:10px 20px; border-radius:5px; font-weight:bold; margin-top:10px;">Obtenir un itinéraire</a>
+      </div>
+      
+      <div class="info-section">
+        <h2>Nous trouver</h2>
+        <div class="map-container restaurant-page">
+          <div class="map-loading"><div class="map-loading-spinner"></div></div>
+          <div id="restaurant-map"></div>
+          <button class="center-map-btn" title="Centrer la carte">📍</button>
+        </div>
+      </div>
+      
+      <div class="info-section">
+        <h2>À propos</h2>
+        <p>Situé dans un magnifique hôtel particulier du XVIIe siècle dans le Marais, Dessance a remporté le Paris Design Award pour son cadre exceptionnel.</p>
+        <p>Sous la direction de Philippe Baranes, le restaurant offre une expérience gastronomique unique avec des menus dégustation Terre & Mer ou Végétariens. Chaque plat est une œuvre d'art, alliant saveurs, textures et esthétique soignée.</p>
+        <p>Le restaurant est particulièrement réputé pour son approche créative de la gastronomie moderne française et ses accords de boissons originaux.</p>
+      </div>
+    </div>
+    
+    <div class="info-section menu-section">
+      <h2>Nos Menus Dégustation</h2>
+      
+      <div style="margin-bottom:30px;">
+        <h3>Menu Terre & Mer (6 services)</h3>
+        <p style="color:#7f8c8d; font-style:italic; margin-bottom:20px;">Un voyage gastronomique entre terre et mer</p>
+        <div class="menu-item">
+          <div>
+            <div style="font-weight:bold;">Amuse-bouche du chef</div>
+            <div style="color:#7f8c8d; font-size:0.9rem;">Selon l'inspiration du jour</div>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div>
+            <div style="font-weight:bold;">Carpaccio de Saint-Jacques</div>
+            <div style="color:#7f8c8d; font-size:0.9rem;">Agrumes, huile d'olive première pression et herbes fraîches</div>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div>
+            <div style="font-weight:bold;">Foie gras poêlé</div>
+            <div style="color:#7f8c8d; font-size:0.9rem;">Réduction de Porto et fruits de saison</div>
+          </div>
+        </div>
+        
+        <div style="font-weight:bold; text-align:right; margin-top:15px; color:#3498db;">Menu complet 75€</div>
+        <div style="font-size:0.9rem; text-align:right; margin-top:5px; color:#7f8c8d;">Accord mets et vins +30€</div>
+      </div>
+      
+      <div>
+        <h3>Menu Végétarien (5 services)</h3>
+        <p style="color:#7f8c8d; font-style:italic; margin-bottom:20px;">Une ode créative aux légumes et saveurs végétales</p>
+        <div class="menu-item">
+          <div>
+            <div style="font-weight:bold;">Gaspacho de légumes anciens</div>
+            <div style="color:#7f8c8d; font-size:0.9rem;">Crème de basilic et petits croûtons</div>
+          </div>
+        </div>
+        
+        <div class="menu-item">
+          <div>
+            <div style="font-weight:bold;">Déclinaison de betteraves</div>
+            <div style="color:#7f8c8d; font-size:0.9rem;">En carpaccio, en purée et chips croustillantes</div>
+          </div>
+        </div>
+        
+        <div style="font-weight:bold; text-align:right; margin-top:15px; color:#3498db;">Menu complet 65€</div>
+        <div style="font-size:0.9rem; text-align:right; margin-top:5px; color:#7f8c8d;">Accord mets et vins +25€</div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../js/maps.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mapLoading = document.querySelector('.map-loading');
+      if (mapLoading) {
+        setTimeout(() => {
+          mapLoading.style.display = 'none';
+          initSingleRestaurantMap('dessance');
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
