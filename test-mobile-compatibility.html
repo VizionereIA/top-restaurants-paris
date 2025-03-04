@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test de Compatibilité Mobile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-results {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+        .pass { color: green; }
+        .fail { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Test de Compatibilité Mobile</h1>
+    
+    <div id="responsive-test" class="test-results">
+        <h2>Test de Responsive Design</h2>
+        <p id="viewport-test">Détection de la largeur de viewport : <span id="viewport-result"></span></p>
+        <p id="touch-target-test">Taille des éléments interactifs : <span id="touch-target-result"></span></p>
+    </div>
+
+    <div id="performance-test" class="test-results">
+        <h2>Test de Performance</h2>
+        <p id="load-time-test">Temps de chargement : <span id="load-time-result"></span></p>
+    </div>
+
+    <script>
+        // Test de la largeur du viewport
+        function testViewportResponsiveness() {
+            const viewportWidth = window.innerWidth;
+            const result = document.getElementById('viewport-result');
+            const testResult = document.getElementById('viewport-test');
+            
+            result.textContent = `${viewportWidth}px`;
+            
+            if (viewportWidth < 768) {
+                result.classList.add('pass');
+                testResult.classList.add('pass');
+            } else {
+                result.classList.add('fail');
+                testResult.classList.add('fail');
+            }
+        }
+
+        // Test de la taille des éléments interactifs
+        function testTouchTargets() {
+            const minTouchSize = 44; // pixels, recommandation WCAG
+            const touchTargets = document.querySelectorAll('button, a, input, select');
+            const result = document.getElementById('touch-target-result');
+            const testResult = document.getElementById('touch-target-test');
+            
+            const invalidTargets = Array.from(touchTargets).filter(el => {
+                const rect = el.getBoundingClientRect();
+                return rect.width < minTouchSize || rect.height < minTouchSize;
+            });
+            
+            if (invalidTargets.length === 0) {
+                result.textContent = 'Tous les éléments sont accessibles';
+                result.classList.add('pass');
+                testResult.classList.add('pass');
+            } else {
+                result.textContent = `${invalidTargets.length} élément(s) trop petit(s)`;
+                result.classList.add('fail');
+                testResult.classList.add('fail');
+            }
+        }
+
+        // Test du temps de chargement
+        function testLoadPerformance() {
+            const loadTime = window.performance.timing.loadEventEnd - window.performance.timing.navigationStart;
+            const result = document.getElementById('load-time-result');
+            const testResult = document.getElementById('load-time-test');
+            
+            result.textContent = `${loadTime} ms`;
+            
+            if (loadTime < 3000) {
+                result.classList.add('pass');
+                testResult.classList.add('pass');
+            } else {
+                result.classList.add('fail');
+                testResult.classList.add('fail');
+            }
+        }
+
+        // Exécution des tests
+        window.addEventListener('load', () => {
+            testViewportResponsiveness();
+            testTouchTargets();
+            testLoadPerformance();
+        });
+    </script>
+</body>
+</html>
