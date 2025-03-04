@@ -1,4 +1,5 @@
 // Gestion des données des restaurants
+import { getRandomRestaurantImage, getGalleryImages } from './imageService.js';
 
 // La liste des restaurants
 const restaurantsData = [
@@ -23,12 +24,8 @@ const restaurantsData = [
         description: 'Brunch créatif et ambiance cosy avec une cuisine d\'inspiration du Moyen-Orient',
         longDescription: 'Situé au cœur du 11ème arrondissement de Paris, Kafkaf est un havre de paix où se mêlent saveurs du Moyen-Orient et atmosphère décontractée. Leurs falafels croustillants à l\'extérieur et moelleux à l\'intérieur sont légendaires, tout comme leurs salades fraîches aux herbes aromatiques. Le cadre, avec ses murs bruts et ses touches de verdure, invite à la détente.',
         specialties: ['Falafels', 'Houmous maison', 'Shakshuka', 'Labneh aux herbes'],
-        imageUrl: 'img/restaurants/kafkaf.jpg',
-        galleryImages: [
-            'img/gallery/kafkaf-1.jpg',
-            'img/gallery/kafkaf-2.jpg',
-            'img/gallery/kafkaf-3.jpg'
-        ],
+        imageUrl: '', // Sera rempli par l'API
+        galleryImages: [], // Sera rempli par l'API
         location: {
             lat: 48.8561,
             lng: 2.3822
@@ -69,12 +66,8 @@ const restaurantsData = [
         description: 'Cuisine traditionnelle indienne authentique dans le quartier de la Gare du Nord',
         longDescription: 'L\'Épicerie du Nord est un authentique restaurant indien caché dans une rue tranquille du 10ème arrondissement. Les épices sont importées directement du sous-continent, et les plats sont préparés selon des recettes familiales transmises depuis des générations. Le tandoor (four traditionnel) produit des naans incomparables et des viandes tendres aux saveurs fumées.',
         specialties: ['Butter chicken', 'Biryani d\'agneau', 'Naan au fromage', 'Lassi à la rose'],
-        imageUrl: 'img/restaurants/epicerie-nord.jpg',
-        galleryImages: [
-            'img/gallery/epicerie-1.jpg',
-            'img/gallery/epicerie-2.jpg',
-            'img/gallery/epicerie-3.jpg'
-        ],
+        imageUrl: '', // Sera rempli par l'API
+        galleryImages: [], // Sera rempli par l'API
         location: {
             lat: 48.8766,
             lng: 2.3522
@@ -115,12 +108,8 @@ const restaurantsData = [
         description: 'Cuisine orientale raffinée dans le cadre historique du Passage des Panoramas',
         longDescription: 'Nichée dans le pittoresque Passage des Panoramas, Saveurs d\'Orient propose un voyage culinaire entre Liban et Maroc. Dans un décor aux influences orientales délicates, vous dégusterez des mezzes préparés à la minute, des tajines mijotés longuement et des pâtisseries au miel et aux fruits secs. La sélection de thés parfumés complète parfaitement l\'expérience.',
         specialties: ['Mezze varié', 'Tajine d\'agneau aux pruneaux', 'Pastilla au poulet', 'Baklava maison'],
-        imageUrl: 'img/restaurants/saveurs-orient.jpg',
-        galleryImages: [
-            'img/gallery/saveurs-1.jpg',
-            'img/gallery/saveurs-2.jpg',
-            'img/gallery/saveurs-3.jpg'
-        ],
+        imageUrl: '', // Sera rempli par l'API
+        galleryImages: [], // Sera rempli par l'API
         location: {
             lat: 48.8721,
             lng: 2.3454
@@ -161,12 +150,8 @@ const restaurantsData = [
         description: 'Bistrot mi-parisien mi-new-yorkais avec une ambiance décontractée',
         longDescription: 'La Maison Mère est le parfait hybride entre un bistrot parisien et un restaurant tendance de Brooklyn. Le menu marie habilement les techniques françaises aux influences américaines, offrant aussi bien un excellent steak-frites qu\'un burger gourmet. L\'intérieur industriel chic avec ses grandes verrières et ses banquettes en cuir crée une atmosphère à la fois élégante et décontractée.',
         specialties: ['Burger Maison Mère', 'César Salade au poulet fermier', 'Cheesecake New-Yorkais', 'Cocktails signature'],
-        imageUrl: 'img/restaurants/maison-mere.jpg',
-        galleryImages: [
-            'img/gallery/maison-mere-1.jpg',
-            'img/gallery/maison-mere-2.jpg',
-            'img/gallery/maison-mere-3.jpg'
-        ],
+        imageUrl: '', // Sera rempli par l'API
+        galleryImages: [], // Sera rempli par l'API
         location: {
             lat: 48.8765,
             lng: 2.3451
@@ -207,12 +192,8 @@ const restaurantsData = [
         description: 'Restaurant gastronomique primé dans le Marais, spécialisé dans la cuisine légère et créative',
         longDescription: 'Dessance est une adresse unique dans le Marais qui a révolutionné la gastronomie parisienne avec son approche innovante. Le chef propose une cuisine légère, où les légumes et fruits sont mis à l\'honneur dans des assiettes aussi belles que savoureuses. Le restaurant offre plusieurs menus dégustation qui changent au fil des saisons, mettant en avant les produits frais et locaux.',
         specialties: ['Menu dégustation saisonnier', 'Légumes oubliés', 'Poisson sauvage', 'Desserts végétaux'],
-        imageUrl: 'img/restaurants/dessance.jpg',
-        galleryImages: [
-            'img/gallery/dessance-1.jpg',
-            'img/gallery/dessance-2.jpg',
-            'img/gallery/dessance-3.jpg'
-        ],
+        imageUrl: '', // Sera rempli par l'API
+        galleryImages: [], // Sera rempli par l'API
         location: {
             lat: 48.8589,
             lng: 2.3662
@@ -234,14 +215,44 @@ const restaurantsData = [
     }
 ];
 
-// Fonction pour charger les données
+// Fonction pour charger les données avec images depuis Pexels
 export async function loadRestaurantsData() {
-    // Simule un chargement asynchrone
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve(restaurantsData);
-        }, 100);
-    });
+    // Créer une copie pour ne pas modifier l'original
+    const enhancedData = JSON.parse(JSON.stringify(restaurantsData));
+    
+    try {
+        // Pour chaque restaurant, récupérer des images si nécessaire
+        for (const restaurant of enhancedData) {
+            // Image principale
+            if (!restaurant.imageUrl) {
+                const searchQuery = `${restaurant.cuisine} restaurant food`;
+                const imageData = await getRandomRestaurantImage(searchQuery);
+                
+                if (imageData) {
+                    restaurant.imageUrl = imageData.url;
+                    restaurant.imageCredit = {
+                        photographer: imageData.photographer,
+                        url: imageData.photographerUrl
+                    };
+                }
+            }
+            
+            // Images de galerie
+            if (!restaurant.galleryImages || restaurant.galleryImages.length === 0) {
+                const galleryQuery = `${restaurant.name} ${restaurant.cuisine} food`;
+                const galleryData = await getGalleryImages(galleryQuery, 3);
+                
+                if (galleryData && galleryData.length > 0) {
+                    restaurant.galleryImages = galleryData.map(img => img.url);
+                    restaurant.galleryCredits = galleryData;
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Erreur lors du chargement des images:", error);
+    }
+    
+    return enhancedData;
 }
 
 // Fonction pour récupérer un restaurant par son ID
