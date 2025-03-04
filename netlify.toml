@@ -1,20 +1,30 @@
 [build]
-  publish = "."
-  command = ""
+  # Répertoire de publication (optionnel)
+  # C'est le répertoire depuis lequel le site sera servi
+  publish = "/"
 
+# Configuration de redirection pour les SPA
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[context.production.environment]
-  GOOGLE_MAPS_API_KEY = ""  # À remplacer avec votre clé API
-
+# En-têtes personnalisés
 [[headers]]
+  # Définit les en-têtes pour tous les fichiers dans le répertoire de publication
   for = "/*"
-  [headers.values]
+    [headers.values]
+    # En-têtes de sécurité recommandés
+    X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://maps.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:"
+    # Cache-Control pour les ressources statiques
+    Cache-Control = "public, max-age=31536000"
+    
+[[headers]]
+  # En-têtes spécifiques pour les fichiers HTML
+  for = "*.html"
+    [headers.values]
+    # Ne pas mettre en cache les fichiers HTML pour toujours avoir la dernière version
+    Cache-Control = "public, max-age=0, must-revalidate"
