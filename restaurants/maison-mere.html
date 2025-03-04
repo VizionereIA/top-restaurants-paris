@@ -3,58 +3,269 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Maison Mère - Bistrot Franco-Américain</title>
+  <title>La Maison Mère - Bistrot Franco-Américain à Paris</title>
   <link rel="stylesheet" href="../css/maps.css">
   <style>
-    body {font-family:'Segoe UI',sans-serif; line-height:1.6; color:#333; max-width:1200px; margin:0 auto; padding:20px; background-color:#f8f9fa;}
-    header {text-align:center; margin-bottom:40px; background-color:#fff; padding:20px; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.1); position:relative;}
-    .back-link {position:absolute; left:20px; top:20px; color:#3498db; text-decoration:none;}
-    .restaurant-main-image {width:100%; height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;}
-    .restaurant-content {display:flex; flex-wrap:wrap; gap:30px;}
-    .restaurant-info {flex:1; min-width:300px;}
-    .info-section {background-color:#fff; border-radius:10px; box-shadow:0 5px 15px rgba(0,0,0,0.1); padding:25px; margin-bottom:30px;}
-    .menu-section {flex:2; min-width:300px;}
-    .badge {display:inline-block; padding:5px 10px; border-radius:20px; margin-right:5px; font-size:0.9rem;}
-    .badge.cuisine {background-color:#e74c3c; color:white;}
-    .badge.ambiance {background-color:#9b59b6; color:white;}
-    .badge.prix {background-color:#2ecc71; color:white;}
-    .menu-item {display:flex; justify-content:space-between; margin-bottom:15px; padding-bottom:15px; border-bottom:1px solid #eee;}
-    @media (max-width:768px) {.restaurant-content {flex-direction:column;}}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .back-link {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      color: #3498db;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+    
+    .restaurant-subtitle {
+      color: #7f8c8d;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .restaurant-rating {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    
+    .restaurant-rating .star {
+      color: #f1c40f;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      margin-right: 5px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .badge.cuisine {
+      background-color: #e74c3c;
+      color: white;
+    }
+    
+    .badge.ambiance {
+      background-color: #9b59b6;
+      color: white;
+    }
+    
+    .badge.prix {
+      background-color: #2ecc71;
+      color: white;
+    }
+    
+    .restaurant-main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .restaurant-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .restaurant-info {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .menu-section {
+      flex: 2;
+      min-width: 300px;
+    }
+    
+    .info-section {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    
+    .info-section h2 {
+      color: #2c3e50;
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .info-item {
+      display: flex;
+      margin-bottom: 15px;
+      align-items: flex-start;
+    }
+    
+    .info-item i {
+      width: 24px;
+      margin-right: 15px;
+      color: #3498db;
+    }
+    
+    .reservation-btn {
+      display: inline-block;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      font-weight: bold;
+      margin-top: 15px;
+      text-align: center;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .reservation-btn:hover {
+      background-color: #2980b9;
+    }
+    
+    .menu-category {
+      margin-bottom: 30px;
+    }
+    
+    .menu-category h3 {
+      color: #2c3e50;
+      margin-bottom: 15px;
+    }
+    
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .menu-item-name {
+      font-weight: bold;
+    }
+    
+    .menu-item-description {
+      color: #7f8c8d;
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+    
+    .menu-item-price {
+      color: #3498db;
+      font-weight: bold;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin: 50px 0 30px;
+      color: #2c3e50;
+      font-size: 2rem;
+    }
+    
+    @media (max-width: 768px) {
+      .restaurant-content {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <a href="../index.html" class="back-link">&larr; Retour</a>
+    <a href="../index.html" class="back-link">
+      &larr; Retour à la liste
+    </a>
     <h1>La Maison Mère</h1>
-    <p>Bistrot franco-américain au style industriel chic</p>
-    <div style="display:inline-block; background-color:#3498db; color:white; padding:8px 15px; border-radius:20px; font-weight:bold;">
+    <p class="restaurant-subtitle">Bistrot mi-parisien mi-new-yorkais</p>
+    <div class="restaurant-rating">
       <span>4.7</span>
-      <span style="color:#f1c40f;">★</span>
+      <span class="star">★</span>
     </div>
-    <div style="margin-top:15px;">
+    <div style="margin-top: 15px;">
       <span class="badge cuisine">Franco-Américain</span>
       <span class="badge ambiance">Tendance</span>
       <span class="badge prix">€€-€€€</span>
     </div>
   </header>
   
-  <img src="https://source.unsplash.com/1200x400/?bistro,restaurant" class="restaurant-main-image">
+  <img src="https://source.unsplash.com/1200x400/?bistro,restaurant" alt="La Maison Mère" class="restaurant-main-image">
   
   <div class="restaurant-content">
     <div class="restaurant-info">
       <div class="info-section">
         <h2>Informations</h2>
-        <p><strong>Adresse:</strong> 7 rue Mayran, 75009 Paris</p>
-        <p><strong>Horaires:</strong> Lun-Dim: 12h00-15h00, 19h00-23h00</p>
-        <p><strong>Téléphone:</strong> 01 42 80 03 02</p>
-        <p><strong>Prix moyen:</strong> 20€-35€</p>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=7+rue+Mayran+75009+Paris" target="_blank" style="display:inline-block; background-color:#3498db; color:white; text-decoration:none; padding:10px 20px; border-radius:5px; font-weight:bold; margin-top:10px;">Obtenir un itinéraire</a>
+        <div class="info-item">
+          <i>📍</i>
+          <div>
+            <div>7 rue Mayran, 75009 Paris</div>
+            <div style="margin-top: 10px;">
+              <a href="https://www.google.com/maps/dir/?api=1&destination=7+rue+Mayran+75009+Paris" target="_blank" style="color: #3498db;">Obtenir un itinéraire</a>
+            </div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i>🕒</i>
+          <div>
+            <div>Lundi au Dimanche : 12h00-15h00, 19h00-23h00</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i>💶</i>
+          <div>
+            <div>Plats : 20€-35€</div>
+            <div>Prix moyen : 28€</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i>📞</i>
+          <div>01 42 80 03 02</div>
+        </div>
+        <a href="#" class="reservation-btn">Réserver une table</a>
       </div>
       
+      <!-- Carte Google Maps -->
       <div class="info-section">
         <h2>Nous trouver</h2>
         <div class="map-container restaurant-page">
-          <div class="map-loading"><div class="map-loading-spinner"></div></div>
+          <div class="map-loading">
+            <div class="map-loading-spinner"></div>
+          </div>
           <div id="restaurant-map"></div>
           <button class="center-map-btn" title="Centrer la carte">📍</button>
         </div>
@@ -62,77 +273,83 @@
       
       <div class="info-section">
         <h2>À propos</h2>
-        <p>Situé dans le quartier SoPi (Sud de Pigalle), La Maison Mère est un bistrot qui mélange avec talent l'ambiance parisienne et new-yorkaise.</p>
-        <p>Dans un décor industriel chic des années 60, vous pourrez déguster une cuisine créative qui revisite les classiques français avec une touche américaine. Le lieu est particulièrement prisé par une clientèle jeune et branchée.</p>
-        <p>À proximité de la Gare de l'Est, ce restaurant est devenu une adresse incontournable pour les amateurs de bonne cuisine dans une ambiance décontractée.</p>
+        <p>
+          Situé dans le quartier SoPi (Sud de Pigalle), La Maison Mère est un bistrot qui mélange avec élégance l'atmosphère parisienne et l'énergie new-yorkaise. Ce restaurant tendance offre une cuisine créative dans un cadre au design industriel chic inspiré des années 60.
+        </p>
+        <p>
+          Le chef revisite les classiques de la cuisine franco-américaine avec une touche contemporaine, en privilégiant des produits frais et de saison. L'ambiance y est conviviale et animée, attirant une clientèle jeune et branchée en quête d'une expérience culinaire dans un lieu au style unique.
+        </p>
       </div>
     </div>
     
-    <div class="info-section menu-section">
+    <div class="menu-section info-section">
       <h2>Notre Menu</h2>
       
-      <div style="margin-bottom:30px;">
+      <div class="menu-category">
         <h3>Entrées</h3>
+        
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Burrata crémeuse</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Tomates multicolores, huile d'olive et basilic frais</div>
+            <div class="menu-item-name">Tartare de Bœuf Préparé</div>
+            <div class="menu-item-description">Bœuf coupé au couteau, câpres, cornichons, échalotes, sauce maison</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">12€</div>
+          <div class="menu-item-price">14€</div>
         </div>
         
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Tartare de thon</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Avocat, sauce soja et sésame</div>
+            <div class="menu-item-name">New York Caesar Salad</div>
+            <div class="menu-item-description">Salade romaine, croûtons maison, parmesan, sauce Caesar</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">14€</div>
+          <div class="menu-item-price">12€</div>
         </div>
       </div>
       
-      <div style="margin-bottom:30px;">
+      <div class="menu-category">
         <h3>Plats Principaux</h3>
+        
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Burger Maison Mère</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Bœuf Angus, cheddar affiné, bacon croustillant, sauce secrète</div>
+            <div class="menu-item-name">Maison Mère Burger</div>
+            <div class="menu-item-description">Steak haché Black Angus, cheddar affiné, bacon, tomate, oignons caramélisés, frites maison</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">22€</div>
+          <div class="menu-item-price">22€</div>
         </div>
         
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Pavé de saumon</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Purée de patate douce, légumes de saison et sauce vierge</div>
+            <div class="menu-item-name">Entrecôte Grillée</div>
+            <div class="menu-item-description">Entrecôte française maturée, sauce béarnaise, frites maison</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">24€</div>
+          <div class="menu-item-price">32€</div>
         </div>
         
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Risotto aux champignons</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Champignons des bois, parmesan et truffe</div>
+            <div class="menu-item-name">Lobster Roll</div>
+            <div class="menu-item-description">Pain brioché, homard, avocat, mayo citronée, frites</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">21€</div>
+          <div class="menu-item-price">28€</div>
         </div>
       </div>
       
-      <div>
+      <div class="menu-category">
         <h3>Desserts</h3>
+        
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Cheesecake New-Yorkais</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Coulis de fruits rouges</div>
+            <div class="menu-item-name">New York Cheesecake</div>
+            <div class="menu-item-description">Cheesecake maison, coulis de fruits rouges</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">10€</div>
+          <div class="menu-item-price">10€</div>
         </div>
         
         <div class="menu-item">
           <div>
-            <div style="font-weight:bold;">Crème brûlée à la vanille</div>
-            <div style="color:#7f8c8d; font-size:0.9rem;">Caramélisée minute</div>
+            <div class="menu-item-name">Tarte Fine aux Pommes</div>
+            <div class="menu-item-description">Servie tiède avec glace vanille</div>
           </div>
-          <div style="color:#3498db; font-weight:bold;">9€</div>
+          <div class="menu-item-price">9€</div>
         </div>
       </div>
     </div>
@@ -142,12 +359,10 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const mapLoading = document.querySelector('.map-loading');
-      if (mapLoading) {
-        setTimeout(() => {
-          mapLoading.style.display = 'none';
-          initSingleRestaurantMap('maison-mere');
-        }, 1000);
-      }
+      setTimeout(() => {
+        mapLoading.style.display = 'none';
+        initSingleRestaurantMap('maison-mere');
+      }, 1000);
     });
   </script>
 </body>
