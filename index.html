@@ -375,7 +375,7 @@
           </div>
           
           <div class="actions-container">
-            <a href="#" class="visit-btn">Voir le menu</a>
+            <a href="restaurants/epicerie-du-nord.html" class="visit-btn">Voir le menu</a>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Gare+du+Nord+75010+Paris" target="_blank" class="directions-btn">Itinéraire</a>
           </div>
         </div>
@@ -430,7 +430,7 @@
           </div>
           
           <div class="actions-container">
-            <a href="#" class="visit-btn">Voir le menu</a>
+            <a href="restaurants/saveurs-orient.html" class="visit-btn">Voir le menu</a>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Passage+des+Panoramas+75002+Paris" target="_blank" class="directions-btn">Itinéraire</a>
           </div>
         </div>
@@ -485,7 +485,7 @@
           </div>
           
           <div class="actions-container">
-            <a href="#" class="visit-btn">Voir le menu</a>
+            <a href="restaurants/maison-mere.html" class="visit-btn">Voir le menu</a>
             <a href="https://www.google.com/maps/dir/?api=1&destination=7+rue+Mayran+75009+Paris" target="_blank" class="directions-btn">Itinéraire</a>
           </div>
         </div>
@@ -540,7 +540,7 @@
           </div>
           
           <div class="actions-container">
-            <a href="#" class="visit-btn">Voir le menu</a>
+            <a href="restaurants/dessance.html" class="visit-btn">Voir le menu</a>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Le+Marais+75003+Paris" target="_blank" class="directions-btn">Itinéraire</a>
           </div>
         </div>
@@ -572,12 +572,7 @@
               .replace(/[^a-z0-9]/g, '-')
               .replace(/\-+/g, '-');
               
-            // Si c'est Kafkaf, rediriger vers sa page détaillée
-            if (restaurantName === 'kafkaf') {
-              window.location.href = `restaurants/${restaurantName}.html`;
-            } else {
-              alert(`Vous avez sélectionné ${title}`);
-            }
+            window.location.href = `restaurants/${restaurantName}.html`;
           }
         });
       });
