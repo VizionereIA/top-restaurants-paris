@@ -36,14 +36,14 @@ async function initHomePage() {
     // Initialiser les filtres
     initFilters();
     
-    // Initialiser la carte
-    if (document.getElementById('map')) {
-        RestaurantMaps.init('map');
-    }
-    
     // Charger et afficher les restaurants
     const restaurants = await loadRestaurantsData();
     displayRestaurants(restaurants);
+    
+    // Initialiser la carte après avoir chargé les restaurants
+    if (document.getElementById('map')) {
+        RestaurantMaps.init('map');
+    }
 }
 
 // Initialiser la page de détail d'un restaurant
@@ -98,10 +98,21 @@ function createRestaurantCard(restaurant) {
     // Image du restaurant avec fallback
     const imageUrl = restaurant.imageUrl || 'img/placeholder-restaurant.jpg';
     
+    // Préparation de l'attribution si disponible
+    let attributionHtml = '';
+    if (restaurant.imageCredit) {
+        attributionHtml = `
+            <div class="image-attribution">
+                Photo: <a href="${restaurant.imageCredit.url}" target="_blank" rel="noopener">${restaurant.imageCredit.photographer}</a> | Pexels
+            </div>
+        `;
+    }
+    
     card.innerHTML = `
         <div class="restaurant-image" style="background-image: url('${imageUrl}');">
             <span class="restaurant-price">${restaurant.priceRange}</span>
             <span class="restaurant-rating">${restaurant.rating}★</span>
+            ${attributionHtml}
         </div>
         <div class="restaurant-info">
             <h3>${restaurant.name}</h3>
@@ -122,8 +133,16 @@ function displayRestaurantDetails(restaurant) {
     // Mettre à jour le titre de la page
     document.title = `${restaurant.name} - Top Restaurants de Paris`;
     
-    // Image principale avec fallback
+    // Image principale avec fallback et attribution
     const mainImageUrl = restaurant.imageUrl || 'img/placeholder-restaurant.jpg';
+    let mainImageAttribution = '';
+    if (restaurant.imageCredit) {
+        mainImageAttribution = `
+            <div class="image-attribution">
+                Photo: <a href="${restaurant.imageCredit.url}" target="_blank" rel="noopener">${restaurant.imageCredit.photographer}</a> | Pexels
+            </div>
+        `;
+    }
     
     // Construire la section des horaires
     let hoursHtml = '';
@@ -159,12 +178,25 @@ function displayRestaurantDetails(restaurant) {
         `;
     }
     
-    // Construire la galerie d'images
+    // Construire la galerie d'images avec attributions
     let galleryHtml = '';
     if (restaurant.galleryImages && restaurant.galleryImages.length > 0) {
-        const galleryItems = restaurant.galleryImages
-            .map(image => `<div class="gallery-item" style="background-image: url('${image}');"></div>`)
-            .join('');
+        const galleryItems = restaurant.galleryImages.map((image, index) => {
+            let attribution = '';
+            if (restaurant.galleryCredits && restaurant.galleryCredits[index]) {
+                const credit = restaurant.galleryCredits[index];
+                attribution = `
+                    <div class="image-attribution">
+                        Photo: <a href="${credit.photographerUrl}" target="_blank" rel="noopener">${credit.photographer}</a>
+                    </div>
+                `;
+            }
+            return `
+                <div class="gallery-item" style="background-image: url('${image}');">
+                    ${attribution}
+                </div>
+            `;
+        }).join('');
             
         galleryHtml = `
             <div class="restaurant-gallery">
@@ -206,6 +238,7 @@ function displayRestaurantDetails(restaurant) {
                     <span class="restaurant-price">${restaurant.priceRange}</span>
                     <span class="restaurant-rating">${restaurant.rating}★</span>
                 </div>
+                ${mainImageAttribution}
             </div>
             <div class="restaurant-title">
                 <h1>${restaurant.name}</h1>
@@ -213,7 +246,7 @@ function displayRestaurantDetails(restaurant) {
                 <p class="restaurant-address">${restaurant.address}</p>
                 <div class="restaurant-contacts">
                     <a href="tel:${restaurant.phone}" class="contact-phone">${restaurant.phone}</a>
-                    <a href="${restaurant.website}" target="_blank" class="contact-website">Visiter le site web</a>
+                    <a href="${restaurant.website}" target="_blank" rel="noopener" class="contact-website">Visiter le site web</a>
                 </div>
             </div>
         </div>
@@ -367,12 +400,20 @@ function initGallery() {
             const backgroundImage = this.style.backgroundImage;
             const imageUrl = backgroundImage.slice(backgroundImage.indexOf('(') + 1, backgroundImage.indexOf(')'));
             
+            // Récupérer l'attribution si elle existe
+            let attribution = '';
+            const attributionEl = this.querySelector('.image-attribution');
+            if (attributionEl) {
+                attribution = `<div class="lightbox-attribution">${attributionEl.innerHTML}</div>`;
+            }
+            
             // Créer la vue agrandie
             const lightbox = document.createElement('div');
             lightbox.className = 'lightbox';
             lightbox.innerHTML = `
                 <div class="lightbox-content">
-                    <img src=${imageUrl.replace(/['"]/g, '')} alt="Vue agrandie">
+                    <img src=${imageUrl.replace(/['\"]/g, '')} alt="Vue agrandie">
+                    ${attribution}
                     <button class="lightbox-close">&times;</button>
                 </div>
             `;
