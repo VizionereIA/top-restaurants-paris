@@ -19,77 +19,83 @@ const themes = {
     }
 };
 
-class ThemeManager {
-    constructor() {
-        this.currentTheme = this.getInitialTheme();
-        this.initThemeToggle();
-        this.applyTheme();
+// Fonctions exportées
+export function initThemeToggle() {
+    // Créer le bouton de bascule si nécessaire
+    createToggleButton();
+    
+    // Définir le thème initial
+    const currentTheme = getInitialTheme();
+    applyTheme(currentTheme);
+}
+
+function createToggleButton() {
+    // Vérifier si le bouton existe déjà
+    if (document.getElementById('theme-toggle')) {
+        return;
     }
+    
+    // Créer le bouton
+    const button = document.createElement('button');
+    button.id = 'theme-toggle';
+    button.innerHTML = '🌙'; // Icône par défaut
+    button.title = 'Changer le thème';
+    button.style.position = 'fixed';
+    button.style.top = '20px';
+    button.style.right = '20px';
+    button.style.backgroundColor = 'transparent';
+    button.style.border = 'none';
+    button.style.fontSize = '24px';
+    button.style.cursor = 'pointer';
+    button.style.zIndex = '1000';
+    
+    // Ajouter l'écouteur d'événement
+    button.addEventListener('click', toggleTheme);
+    
+    // Ajouter au document
+    document.body.appendChild(button);
+}
 
-    getInitialTheme() {
-        // Vérifier la préférence système
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        // Vérifier le localStorage
-        const savedTheme = localStorage.getItem('site-theme');
-        
-        if (savedTheme) {
-            return savedTheme;
-        }
-        
-        return systemPrefersDark ? 'dark' : 'light';
+function getInitialTheme() {
+    // Vérifier la préférence système
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Vérifier le localStorage
+    const savedTheme = localStorage.getItem('site-theme');
+    
+    if (savedTheme) {
+        return savedTheme;
     }
+    
+    return systemPrefersDark ? 'dark' : 'light';
+}
 
-    initThemeToggle() {
-        const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
-        }
-
-        // Écouter les changements de préférence système
-        window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-            if (e.matches) {
-                this.setTheme('dark');
-            } else {
-                this.setTheme('light');
-            }
-        });
-    }
-
-    toggleTheme() {
-        const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-        this.setTheme(newTheme);
-    }
-
-    setTheme(theme) {
-        this.currentTheme = theme;
-        this.applyTheme();
-        
-        // Sauvegarder dans localStorage
-        localStorage.setItem('site-theme', theme);
-        
-        // Mettre à jour l'icône du bouton
-        const themeToggle = document.getElementById('theme-toggle');
-        if (themeToggle) {
-            themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
-        }
-    }
-
-    applyTheme() {
-        const theme = themes[this.currentTheme];
-        
-        document.documentElement.style.setProperty('--bg-color', theme.background);
-        document.documentElement.style.setProperty('--text-color', theme.text);
-        document.documentElement.style.setProperty('--card-bg', theme.cardBackground);
-        document.documentElement.style.setProperty('--header-bg', theme.headerBackground);
-        document.documentElement.style.setProperty('--filter-bg', theme.filterBackground);
-        document.documentElement.style.setProperty('--border-color', theme.borderColor);
+function toggleTheme() {
+    const currentTheme = localStorage.getItem('site-theme') || getInitialTheme();
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    applyTheme(newTheme);
+    
+    // Sauvegarder dans localStorage
+    localStorage.setItem('site-theme', newTheme);
+    
+    // Mettre à jour l'icône du bouton
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.innerHTML = newTheme === 'light' ? '🌙' : '☀️';
     }
 }
 
-// Initialiser le gestionnaire de thème
-document.addEventListener('DOMContentLoaded', () => {
-    new ThemeManager();
-});
+function applyTheme(themeName) {
+    const theme = themes[themeName];
+    
+    document.documentElement.style.setProperty('--bg-color', theme.background);
+    document.documentElement.style.setProperty('--text-color', theme.text);
+    document.documentElement.style.setProperty('--card-bg', theme.cardBackground);
+    document.documentElement.style.setProperty('--header-bg', theme.headerBackground);
+    document.documentElement.style.setProperty('--filter-bg', theme.filterBackground);
+    document.documentElement.style.setProperty('--border-color', theme.borderColor);
+}
 
-export default ThemeManager;
+// Initialiser le gestionnaire de thème au chargement
+document.addEventListener('DOMContentLoaded', initThemeToggle);
