@@ -1,0 +1,43 @@
+[build]
+  # Répertoire à déployer
+  publish = "."
+
+  # Commandes de build (si nécessaire)
+  # command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Sécurité et performances
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://maps.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://maps.googleapis.com"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Compression et caching
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Configuration pour SPA
+[[headers]]
+  for = "/"
+  [headers.values]
+    X-Robots-Tag = "index, follow"
