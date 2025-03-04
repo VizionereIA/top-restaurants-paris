@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Épicerie du Nord - Restaurant Indien</title>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/reviews.css">
+    <link rel="stylesheet" href="../css/maps.css">
+    <style>
+        .restaurant-details {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .restaurant-gallery {
+            flex: 1;
+        }
+        .restaurant-info {
+            flex: 1;
+        }
+        .gallery-main {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .gallery-thumbnails img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .menu-section {
+            margin-top: 30px;
+        }
+        .menu-category {
+            margin-bottom: 20px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle" aria-label="Toggle Theme">☀️</button>
+
+    <div class="container">
+        <header>
+            <h1>L'Épicerie du Nord</h1>
+            <p class="subtitle">Restaurant Indien - Paris 10e</p>
+        </header>
+
+        <div class="restaurant-details">
+            <div class="restaurant-gallery">
+                <img src="/images/epicerie-nord-main.jpg" alt="L'Épicerie du Nord" class="gallery-main" id="main-image">
+                <div class="gallery-thumbnails">
+                    <img src="/images/epicerie-nord-1.jpg" alt="Image 1" onclick="document.getElementById('main-image').src = this.src">
+                    <img src="/images/epicerie-nord-2.jpg" alt="Image 2" onclick="document.getElementById('main-image').src = this.src">
+                    <img src="/images/epicerie-nord-3.jpg" alt="Image 3" onclick="document.getElementById('main-image').src = this.src">
+                </div>
+            </div>
+
+            <div class="restaurant-info">
+                <h2>À propos</h2>
+                <p>Situé près de la Gare du Nord, L'Épicerie du Nord est un restaurant indien authentique offrant une expérience culinaire riche et savoureuse. Notre chef propose des plats traditionnels préparés avec des épices importées directement d'Inde.</p>
+                
+                <h3>Informations pratiques</h3>
+                <ul>
+                    <li>📍 Quartier Gare du Nord, 75010 Paris</li>
+                    <li>📞 01 XX XX XX XX</li>
+                    <li>🕒 Lun-Dim: 11h30-15h00, 18h30-23h00</li>
+                    <li>💶 Plats: 15€-25€</li>
+                </ul>
+
+                <div id="restaurant-map" style="height: 250px; margin-top: 20px;"></div>
+            </div>
+        </div>
+
+        <div class="menu-section">
+            <h2>Notre Menu</h2>
+            
+            <div class="menu-category">
+                <h3>Entrées</h3>
+                <div class="menu-item">
+                    <span>Samossas</span>
+                    <span>8€</span>
+                </div>
+                <div class="menu-item">
+                    <span>Bhaji d'oignons</span>
+                    <span>7€</span>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Plats principaux</h3>
+                <div class="menu-item">
+                    <span>Butter Chicken</span>
+                    <span>18€</span>
+                </div>
+                <div class="menu-item">
+                    <span>Tikka Masala</span>
+                    <span>16€</span>
+                </div>
+                <div class="menu-item">
+                    <span>Curry végétarien</span>
+                    <span>15€</span>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Desserts</h3>
+                <div class="menu-item">
+                    <span>Gulab Jamun</span>
+                    <span>6€</span>
+                </div>
+                <div class="menu-item">
+                    <span>Lassi</span>
+                    <span>5€</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-section">
+            <div class="reviews-header">
+                <h2 class="reviews-title">Avis et Commentaires</h2>
+                <div id="average-rating">Note moyenne : 4.8/5</div>
+            </div>
+
+            <form id="review-form">
+                <div class="form-group">
+                    <label for="review-name">Votre nom</label>
+                    <input type="text" id="review-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="review-email">Email (optionnel)</label>
+                    <input type="email" id="review-email">
+                </div>
+
+                <div class="form-group">
+                    <label>Votre note</label>
+                    <div class="rating-input">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">★</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="review-comment">Votre commentaire</label>
+                    <textarea id="review-comment" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" id="submit-review">Envoyer mon avis</button>
+            </form>
+
+            <div id="reviews-list">
+                <!-- Les avis seront chargés dynamiquement -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/theme-toggle.js" type="module"></script>
+    <script src="../js/reviews.js" type="module"></script>
+    <script src="../js/maps.js" type="module"></script>
+    <script>
+        // Script spécifique à cette page pour initialiser une carte avec la position précise
+        document.addEventListener('DOMContentLoaded', () => {
+            const mapOptions = {
+                center: { lat: 48.8766, lng: 2.3522 },
+                zoom: 15
+            };
+            
+            if (window.google && window.google.maps) {
+                const map = new google.maps.Map(document.getElementById('restaurant-map'), mapOptions);
+                new google.maps.Marker({
+                    position: mapOptions.center,
+                    map: map,
+                    title: 'L\'Épicerie du Nord'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
