@@ -1,69 +1,73 @@
-                    <span>Thé</span>
-                    <span>4€</span>
-                </div>
-                <div class="menu-item">
-                    <span>Jus frais</span>
-                    <span>6€</span>
-                </div>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kafkaf - Restaurant Middle Eastern</title>
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/reviews.css">
+    <link rel="stylesheet" href="../css/maps.css">
+    <link rel="stylesheet" href="../css/reservation.css">
+    <!-- Précédents styles conservés -->
+</head>
+<body>
+    <!-- Contenu précédent conservé -->
+
+    <!-- Section Réservation -->
+    <div class="reservation-section">
+        <h2>Réserver une table</h2>
+        <form id="reservation-form" class="reservation-form">
+            <div class="form-group">
+                <label for="reservation-name">Nom complet *</label>
+                <input type="text" id="reservation-name" required>
             </div>
-        </div>
 
-        <div class="reviews-section">
-            <div class="reviews-header">
-                <h2 class="reviews-title">Avis et Commentaires</h2>
-                <div id="average-rating">Note moyenne : 4.8/5</div>
+            <div class="form-group">
+                <label for="reservation-email">Email *</label>
+                <input type="email" id="reservation-email" required>
             </div>
 
-            <form id="review-form">
-                <div class="form-group">
-                    <label for="review-name">Votre nom</label>
-                    <input type="text" id="review-name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="review-email">Email (optionnel)</label>
-                    <input type="email" id="review-email">
-                </div>
-
-                <div class="form-group">
-                    <label>Votre note</label>
-                    <div class="rating-input">
-                        <input type="radio" id="star5" name="rating" value="5">
-                        <label for="star5">★</label>
-                        <input type="radio" id="star4" name="rating" value="4">
-                        <label for="star4">★</label>
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3">★</label>
-                        <input type="radio" id="star2" name="rating" value="2">
-                        <label for="star2">★</label>
-                        <input type="radio" id="star1" name="rating" value="1">
-                        <label for="star1">★</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="review-comment">Votre commentaire</label>
-                    <textarea id="review-comment" rows="4" required></textarea>
-                </div>
-
-                <button type="submit" id="submit-review">Envoyer mon avis</button>
-            </form>
-
-            <div id="reviews-list">
-                <!-- Les avis seront chargés dynamiquement via JavaScript -->
+            <div class="form-group">
+                <label for="reservation-date">Date *</label>
+                <input type="date" id="reservation-date" required>
             </div>
-        </div>
+
+            <div class="form-group">
+                <label for="reservation-time">Heure *</label>
+                <input type="time" id="reservation-time" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reservation-guests">Nombre de personnes *</label>
+                <select id="reservation-guests" required>
+                    <option value="">Sélectionner</option>
+                    <option value="1">1 personne</option>
+                    <option value="2">2 personnes</option>
+                    <option value="3">3 personnes</option>
+                    <option value="4">4 personnes</option>
+                    <option value="5">5 personnes</option>
+                    <option value="6">6 personnes ou plus</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="reservation-special-requests">Demandes spéciales</label>
+                <textarea id="reservation-special-requests" rows="3" placeholder="Allergies, régimes spéciaux, etc."></textarea>
+            </div>
+
+            <button type="submit" id="submit-reservation">Réserver ma table</button>
+        </form>
+    </div>
+
+    <!-- Modal de confirmation de réservation -->
+    <div id="reservation-confirmation" class="reservation-confirmation">
+        <div id="confirmation-details"></div>
+        <button onclick="document.getElementById('reservation-confirmation').classList.remove('show')">Fermer</button>
     </div>
 
     <script src="../js/theme-toggle.js" type="module"></script>
     <script src="../js/reviews.js" type="module"></script>
-    <script>
-        // Gestion de la galerie d'images
-        document.querySelectorAll('.gallery-thumbnails img').forEach(img => {
-            img.addEventListener('click', function() {
-                document.getElementById('main-image').src = this.src;
-            });
-        });
-    </script>
+    <script src="../js/maps.js" type="module"></script>
+    <script src="../js/reservation.js" type="module"></script>
 </body>
 </html>
