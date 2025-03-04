@@ -1,0 +1,64 @@
+/* Variables de thème */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #333;
+    --card-bg: #ffffff;
+    --header-bg: #ffffff;
+    --filter-bg: #f4f4f4;
+    --border-color: #ddd;
+}
+
+/* Styles de base pour le thème */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Styles pour les en-têtes */
+header {
+    background-color: var(--header-bg);
+    transition: background-color 0.3s;
+}
+
+/* Styles pour les cartes de restaurants */
+.restaurant-card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Styles pour les filtres */
+.filters-container {
+    background-color: var(--filter-bg);
+    transition: background-color 0.3s;
+}
+
+/* Bouton de thème */
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: transform 0.3s;
+}
+
+#theme-toggle:hover {
+    transform: scale(1.2);
+}
+
+/* Styles spécifiques du mode sombre */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+        --card-bg: #1e1e1e;
+        --header-bg: #1a1a1a;
+        --filter-bg: #2c2c2c;
+        --border-color: #444;
+    }
+}
